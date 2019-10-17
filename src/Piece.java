@@ -1,3 +1,5 @@
+import org.jetbrains.annotations.Contract;
+
 public class Piece {
 
     // fields
@@ -13,7 +15,7 @@ public class Piece {
     private final int OFFSET = 7;
 
 
-    // Constructor takes only player num to decide where
+    // Constructor takes only player num to decide where player should start
     Piece(int playerNum) {
         ar = Area.HOME;
         this.playerNum = playerNum;
