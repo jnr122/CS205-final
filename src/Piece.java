@@ -1,5 +1,17 @@
 import org.jetbrains.annotations.Contract;
 
+/**
+ * Piece class
+ *
+ * Represents a single game piece
+ * Stores area, player num, offset, location, board size, finish size
+ * Supports moving to board, moving to home, moving n spaces, and getting area
+ *
+ * Offset value allows player movement to follow the same mechanics but not overlap as they all have
+ * different starting locations
+ *
+ * Last modified 10/17/19
+ */
 public class Piece {
 
     // fields
@@ -14,28 +26,38 @@ public class Piece {
 
     private final int OFFSET = 7;
 
-
-    // Constructor takes only player num to decide where player should start
+    /**
+     * Constructor
+     * @param playerNum, the player's turn value
+     */
     Piece(int playerNum) {
         ar = Area.HOME;
         this.playerNum = playerNum;
         playerOffset = playerNum * OFFSET;
     }
 
-    // send piece to board and initialize at relative '0'
+    /**
+     * Send piece to board and initialize at relative '0'
+     */
     public void toBoard() {
         ar = Area.BOARD;
         // adjust starting loc  because not all players start at 0
         loc = playerOffset;
     }
 
-    // send piece back home and reset loc to -1
+    /**
+     * Send piece back home and reset loc to -1
+     */
     public void toHome() {
         ar = Area.HOME;
         loc = -1;
     }
 
-    // return -1 if move unsuccessful, else return loc
+    /**
+     * Try to move piece n spaces
+     * @param n
+     * @return return -1 if move unsuccessful, else return loc
+     */
     public int move(int n) {
         // moving on board
         if (ar == Area.BOARD) {
@@ -65,15 +87,15 @@ public class Piece {
             }
             return -1;
         }
-
         // tried to move directly from HOME
         return -1;
-
     }
 
+    /**
+     * Area getter
+     * @return current area
+     */
     public Area getAr() {
         return ar;
     }
-
-
 }
