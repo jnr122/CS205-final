@@ -40,7 +40,7 @@ public class Piece {
             // full lap
             if (loc + n > BOARDSIZE + playerOffset) {
                 // continuing around
-                if ((loc + n) - (BOARDSIZE + playerOffset) > 4) {
+                if ((loc + n) - (BOARDSIZE + playerOffset) > FINISHSIZE) {
                     loc = (loc + n) % BOARDSIZE;
                     return loc;
                 } else {
@@ -57,7 +57,7 @@ public class Piece {
             }
             // moving in finish
         } else if (ar == Area.FINISH) {
-            if (loc + n <= 4) {
+            if (loc + n <= FINISHSIZE) {
                 loc += n;
                 return loc;
             }
