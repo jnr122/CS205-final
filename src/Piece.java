@@ -33,7 +33,7 @@ public class Piece {
     Piece(int playerNum) {
         ar = Area.HOME;
         this.playerNum = playerNum;
-        playerOffset = 0;//playerNum * OFFSET;
+        playerOffset = playerNum * OFFSET;
     }
 
     /**
@@ -42,7 +42,7 @@ public class Piece {
     public void toBoard() {
         ar = Area.BOARD;
         // adjust starting relativeLoc  because not all players start at 0
-        relativeLoc = playerOffset;
+        relativeLoc = 0;
     }
 
     /**
@@ -64,15 +64,19 @@ public class Piece {
         // moving on board
         if (ar == Area.BOARD) {
             // full lap
-            if (relativeLoc + n > BOARDSIZE + playerOffset) {
+            if (relativeLoc + n > BOARDSIZE
+
+
+
+            ) {
                 // continuing around
-                if ((relativeLoc + n) - (BOARDSIZE + playerOffset) > FINISHSIZE) {
+                if ((relativeLoc + n) - (BOARDSIZE) > FINISHSIZE) {
                     relativeLoc = (relativeLoc + n) % BOARDSIZE;
                     return relativeLoc;
                 } else {
                     // entering finish
                     ar = Area.FINISH;
-                    relativeLoc = (relativeLoc + n) - (BOARDSIZE + playerOffset);
+                    relativeLoc = (relativeLoc + n) - (BOARDSIZE);
                     return relativeLoc;
                 }
 
@@ -95,7 +99,7 @@ public class Piece {
         } else  {
             if (n == 6) {
                 ar = Area.BOARD;
-                relativeLoc = playerOffset;
+                relativeLoc = 0;
                 return relativeLoc;
             } else {
                 return -1;
@@ -113,6 +117,8 @@ public class Piece {
 
     /**
      * Computes the absolute location of the piece on the board using its relative location
+     *
+     * If the piece is in HOME or FINISH absoluteLoc = relativeLoc
      * @return the absolute location of the piece
      */
     public int getAbsoluteLoc() {
@@ -127,7 +133,7 @@ public class Piece {
      * Overridden toString
      */
     public String toString() {
-        String s = "Area: " + ar + " relativeLoc: " + relativeLoc;
+        String s = "Area: " + ar + " Rel: " + relativeLoc  + " Abs: " + getAbsoluteLoc();;
         return s;
     }
 }
