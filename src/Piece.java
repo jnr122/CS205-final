@@ -4,11 +4,11 @@ import org.jetbrains.annotations.Contract;
  * Piece class
  *
  * Represents a single game piece
- * Stores area, player num, offset, location, board size, finish size
+ * Stores area, player num, offset, relativeLocation, board size, finish size
  * Supports moving to board, moving to home, moving n spaces, and getting area
  *
  * Offset value allows player movement to follow the same mechanics but not overlap as they all have
- * different starting locations
+ * different starting relativeLocations
  *
  * Last modified 10/17/19
  */
@@ -18,7 +18,7 @@ public class Piece {
     private Area ar;
     private int playerNum;
     private int playerOffset;
-    private int loc = -1;
+    private int relativeLoc = -1;
 
     // 28 board spaces and 4 finish spaces
     private final int BOARDSIZE = 28;
@@ -33,7 +33,7 @@ public class Piece {
     Piece(int playerNum) {
         ar = Area.HOME;
         this.playerNum = playerNum;
-        playerOffset = playerNum * OFFSET;
+        playerOffset = 0;//playerNum * OFFSET;
     }
 
     /**
@@ -41,16 +41,16 @@ public class Piece {
      */
     public void toBoard() {
         ar = Area.BOARD;
-        // adjust starting loc  because not all players start at 0
-        loc = playerOffset;
+        // adjust starting relativeLoc  because not all players start at 0
+        relativeLoc = playerOffset;
     }
 
     /**
-     * Send piece back home and reset loc to -1
+     * Send piece back home and reset relativeLoc to -1
      */
     public void toHome() {
         ar = Area.HOME;
-        loc = -1;
+        relativeLoc = -1;
     }
 
     /**
@@ -58,36 +58,36 @@ public class Piece {
      *
      * Need to let player decide if they move around or to finish
      * @param n
-     * @return return -1 if move unsuccessful, else return loc
+     * @return return -1 if move unsuccessful, else return relativeLoc
      */
     public int move(int n) {
         // moving on board
         if (ar == Area.BOARD) {
             // full lap
-            if (loc + n > BOARDSIZE + playerOffset) {
+            if (relativeLoc + n > BOARDSIZE + playerOffset) {
                 // continuing around
-                if ((loc + n) - (BOARDSIZE + playerOffset) > FINISHSIZE) {
-                    loc = (loc + n) % BOARDSIZE;
-                    return loc;
+                if ((relativeLoc + n) - (BOARDSIZE + playerOffset) > FINISHSIZE) {
+                    relativeLoc = (relativeLoc + n) % BOARDSIZE;
+                    return relativeLoc;
                 } else {
                     // entering finish
                     ar = Area.FINISH;
-                    loc = (loc + n) - (BOARDSIZE + playerOffset);
-                    return loc;
+                    relativeLoc = (relativeLoc + n) - (BOARDSIZE + playerOffset);
+                    return relativeLoc;
                 }
 
             } else {
                 // still completing lap
-                loc = (loc + n);
-//                loc = (loc + n) % BOARDSIZE;
+                relativeLoc = (relativeLoc + n);
+//                relativeLoc = (relativeLoc + n) % BOARDSIZE;
 
-                return loc;
+                return relativeLoc;
             }
             // moving in finish
         } else if (ar == Area.FINISH) {
-            if (loc + n <= FINISHSIZE) {
-                loc += n;
-                return loc;
+            if (relativeLoc + n <= FINISHSIZE) {
+                relativeLoc += n;
+                return relativeLoc;
             }
             return -1;
 
@@ -95,8 +95,8 @@ public class Piece {
         } else  {
             if (n == 6) {
                 ar = Area.BOARD;
-                loc = playerOffset;
-                return loc;
+                relativeLoc = playerOffset;
+                return relativeLoc;
             } else {
                 return -1;
             }
@@ -112,10 +112,22 @@ public class Piece {
     }
 
     /**
+     * Computes the absolute location of the piece on the board using its relative location
+     * @return the absolute location of the piece
+     */
+    public int getAbsoluteLoc() {
+        if (ar == Area.BOARD) {
+            return (relativeLoc + playerOffset) % BOARDSIZE;
+        }
+
+        return relativeLoc;
+    }
+
+    /**
      * Overridden toString
      */
     public String toString() {
-        String s = "Area: " + ar + " Loc: " + loc;
+        String s = "Area: " + ar + " relativeLoc: " + relativeLoc;
         return s;
     }
 }
