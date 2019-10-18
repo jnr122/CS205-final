@@ -78,7 +78,9 @@ public class Piece {
 
             } else {
                 // still completing lap
-                loc += n;
+                loc = (loc + n);
+//                loc = (loc + n) % BOARDSIZE;
+
                 return loc;
             }
             // moving in finish
@@ -99,8 +101,6 @@ public class Piece {
                 return -1;
             }
         }
-
-
     }
 
     /**
