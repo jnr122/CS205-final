@@ -55,6 +55,8 @@ public class Piece {
 
     /**
      * Try to move piece n spaces
+     *
+     * Need to let player decide if they move around or to finish
      * @param n
      * @return return -1 if move unsuccessful, else return loc
      */
@@ -86,9 +88,19 @@ public class Piece {
                 return loc;
             }
             return -1;
+
+            // tried to move directly from HOME
+        } else  {
+            if (n == 6) {
+                ar = Area.BOARD;
+                loc = playerOffset;
+                return loc;
+            } else {
+                return -1;
+            }
         }
-        // tried to move directly from HOME
-        return -1;
+
+
     }
 
     /**
@@ -97,5 +109,13 @@ public class Piece {
      */
     public Area getAr() {
         return ar;
+    }
+
+    /**
+     * Overridden toString
+     */
+    public String toString() {
+        String s = "Area: " + ar + " Loc: " + loc;
+        return s;
     }
 }
