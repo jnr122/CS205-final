@@ -1,10 +1,19 @@
 import java.util.ArrayList;
 
+/**
+ * Player class
+ *
+ * Represents a single player
+ * Stores an array of pieces and the playerNum
+ * Supports movement to and from board, and movement of piece i by n spaces
+ *
+ * Last modified 10/18/19
+ */
 public class Player {
 
-    static int numPieces = 4;
+    private static int numPieces = 4;
     ArrayList<Piece> pieces;
-    int playerNum;
+    private int playerNum;
 
     /**
      * Constructor
@@ -27,6 +36,7 @@ public class Player {
      * @return -1 on failure, else new loc
      */
     public int move(int i, int n) {
+
         return pieces.get(i).move(n);
     }
 
@@ -50,13 +60,10 @@ public class Player {
      * Overloaded toString
      */
     public String toString() {
-
         String s = "";
         for (int i = 0; i < numPieces; i++) {
-
-            s += pieces.get(i).toString() + "   ";
+            s += pieces.get(i).toString() + "  |  ";
         }
-
         return s;
     }
 
