@@ -7,7 +7,6 @@ import java.util.ArrayList;
  * Stores an array of pieces and the playerNum
  * Supports movement to and from board, and movement of piece i by n spaces
  *
- *
  * Last modified 10/18/19
  */
 public class Player {

@@ -69,51 +69,41 @@ public class Piece {
      */
     // split into valid move function that returns valid moves
     public int move(int n) {
-        validMoves(n);
+        ArrayList<AreaLoc> validAreaLocs = getValidMoves(n);
+        this.relativeLoc = validAreaLocs.get(0).loc;
+        this.ar = validAreaLocs.get(0).ar;
+
         return 0;
     }
 
-    public ArrayList<AreaLoc> validMoves(int n) {
+    public ArrayList<AreaLoc> getValidMoves(int n) {
         ArrayList<AreaLoc> areaLocs = new ArrayList<>();
-        AreaLoc areaLoc;
 
         // moving on board
         if (ar == Area.BOARD) {
-            // full lap
-            if (relativeLoc + n > BOARDSIZE) {
-                // continuing around
-                if ((relativeLoc + n) - (BOARDSIZE) > FINISHSIZE) {
-                    relativeLoc = (relativeLoc + n) % BOARDSIZE;
-//                    return relativeLoc;
-                } else {
-                    // entering finish
-                    ar = Area.FINISH;
-                    relativeLoc = (relativeLoc + n) - (BOARDSIZE);
-//                    return relativeLoc;
+            if (relativeLoc + n > BOARDSIZE) { // full lap
+                if ((relativeLoc + n) - (BOARDSIZE) > FINISHSIZE) { // continuing around
+                    areaLocs.add(new AreaLoc(Area.BOARD,(relativeLoc + n) % BOARDSIZE));
+                } else {  // entering finish
+                    areaLocs.add(new AreaLoc(Area.FINISH,(relativeLoc + n) - (BOARDSIZE)));
                 }
+
             } else {
-                // still completing lap
-                relativeLoc = (relativeLoc + n);
-//                return relativeLoc;
+                areaLocs.add(new AreaLoc(Area.BOARD,relativeLoc + n)); // still completing lap
             }
-            // moving in finish
-        } else if (ar == Area.FINISH) {
+
+        } else if (ar == Area.FINISH) {  // moving in finish
             if (relativeLoc + n <= FINISHSIZE) {
-                relativeLoc += n;
-//                return relativeLoc;
+                areaLocs.add(new AreaLoc(Area.FINISH,relativeLoc + n));
             }
-//            return -1;
-            // tried to move directly from HOME
-        } else  {
+
+        } else  {  // tried to move directly from HOME
             if (n == 6) {
-                ar = Area.BOARD;
-                relativeLoc = 0;
-//                return relativeLoc;
+                areaLocs.add(new AreaLoc(Area.BOARD,0));
             } else {
 //                return -1;
             }
         }
-
 
         return areaLocs;
     }
