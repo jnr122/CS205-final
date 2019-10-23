@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Piece class
@@ -17,6 +18,10 @@ class AreaLoc {
     AreaLoc(Area ar, int loc) {
         this.ar = ar;
         this.loc = loc;
+    }
+
+    public String toString() {
+        return "Ar: " + this.ar + " Loc: " + this.loc;
     }
 };
 
@@ -60,20 +65,10 @@ public class Piece {
         relativeLoc = -1;
     }
 
-    /**
-     * Try to move piece n spaces
-     *
-     * Need to let player decide if they move around or to finish
-     * @param n
-     * @return return -1 if move unsuccessful, else return relativeLoc
-     */
-    // split into valid move function that returns valid moves
-    public int move(int n) {
-        ArrayList<AreaLoc> validAreaLocs = getValidMoves(n);
-        this.relativeLoc = validAreaLocs.get(0).loc;
-        this.ar = validAreaLocs.get(0).ar;
 
-        return 0;
+    public void setArLoc(AreaLoc arLoc) {
+        this.ar = arLoc.ar;
+        this.relativeLoc = arLoc.loc;
     }
 
     public ArrayList<AreaLoc> getValidMoves(int n) {
@@ -86,6 +81,7 @@ public class Piece {
                     areaLocs.add(new AreaLoc(Area.BOARD,(relativeLoc + n) % BOARDSIZE));
                 } else {  // entering finish
                     areaLocs.add(new AreaLoc(Area.FINISH,(relativeLoc + n) - (BOARDSIZE)));
+                    areaLocs.add(new AreaLoc(Area.BOARD,(relativeLoc + n) % BOARDSIZE));
                 }
 
             } else {
@@ -101,8 +97,7 @@ public class Piece {
             if (n == 6) {
                 areaLocs.add(new AreaLoc(Area.BOARD,0));
             } else {
-//                return -1;
-            }
+                areaLocs.add(new AreaLoc(Area.HOME,-1));            }
         }
 
         return areaLocs;
@@ -126,6 +121,14 @@ public class Piece {
         if (ar == Area.BOARD) {
             return (relativeLoc + playerOffset) % BOARDSIZE;
         }
+        return relativeLoc;
+    }
+
+    /**
+     *
+     * @return relativeLoc
+     */
+    public int getRelativeLoc() {
         return relativeLoc;
     }
 
