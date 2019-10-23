@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Piece class
@@ -13,7 +12,7 @@ import java.util.Scanner;
 
 class AreaLoc {
     public Area ar;
-    public int loc;
+    int loc;
 
     AreaLoc(Area ar, int loc) {
         this.ar = ar;
