@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Player class
@@ -37,7 +38,44 @@ public class Player {
      */
     public int move(int i, int n) {
 
-        return pieces.get(i).move(n);
+        // get all valid moves
+        ArrayList<AreaLoc> validMoves = pieces.get(i).getValidMoves(n);
+        validMoves = removeOverlap(validMoves);
+
+        // if making a lap, user gets choice to move into finish or continue around
+        if (validMoves.size() == 2) {
+            Scanner sc = new Scanner(System.in);
+            System.out.print("Move to finish (0) or continue around board (1): ");
+            int choice = sc.nextInt();
+            pieces.get(i).setArLoc(validMoves.get(choice));
+            return 1;
+
+        } else if (validMoves.size() == 1)  {
+            pieces.get(i).setArLoc(validMoves.get(0));
+            return 1;
+        }
+        System.out.println("No valid moves");
+        return -1;
+    }
+
+    /**
+     * Take list of valid moves and remove moves that would overlap with player's other pieces
+     * @param validMoves
+     * @return edited list of valid moves
+     */
+    private ArrayList<AreaLoc> removeOverlap(ArrayList<AreaLoc> validMoves) {
+        for (int j = validMoves.size()-1; j >= 0; j--) {
+            for (int i = 0; i < numPieces; i++) {
+                if (pieces.get(i).getAr() == validMoves.get(j).ar &&
+                        pieces.get(i).getRelativeLoc() == validMoves.get(j).loc) {
+                    validMoves.remove(j);
+                    if (validMoves.size() == 0) {
+                        return validMoves;
+                    }
+                }
+            }
+        }
+        return validMoves;
     }
 
     /**
