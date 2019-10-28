@@ -7,25 +7,26 @@ import java.util.Scanner;
  * Represents a single player
  * Stores an array of pieces and the playerNum
  * Supports movement to and from board, and movement of piece i by n spaces
- *
- * Last modified 10/18/19
  */
 public class Player {
 
-    private static int numPieces = 4;
     ArrayList<Piece> pieces;
     private int playerNum;
+    private Board board;
 
     /**
      * Constructor
      * @param playerNum the player's turn value
      */
-    Player(int playerNum) {
+    Player(int playerNum, Board board) {
         this.playerNum = playerNum;
+        this.board = board;
         pieces = new ArrayList<>();
 
-        for (int i = 0; i < numPieces; i++) {
-            pieces.add(new Piece(playerNum));
+        for (int i = 0; i < Constants.NUMPLAYERPIECES; i++) {
+            Piece p = new Piece(playerNum, i);
+            pieces.add(p);
+            board.update(p);
         }
     }
 
@@ -47,11 +48,15 @@ public class Player {
             Scanner sc = new Scanner(System.in);
             System.out.print("Move to finish (0) or continue around board (1): ");
             int choice = sc.nextInt();
+            board.remove(pieces.get(i));
             pieces.get(i).setArLoc(validMoves.get(choice));
+            board.update(pieces.get(i));
             return 1;
 
         } else if (validMoves.size() == 1)  {
+            board.remove(pieces.get(i));
             pieces.get(i).setArLoc(validMoves.get(0));
+            board.update(pieces.get(i));
             return 1;
         }
         System.out.println("No valid moves");
@@ -65,7 +70,7 @@ public class Player {
      */
     private ArrayList<AreaLoc> removeOverlap(ArrayList<AreaLoc> validMoves) {
         for (int j = validMoves.size()-1; j >= 0; j--) {
-            for (int i = 0; i < numPieces; i++) {
+            for (int i = 0; i < Constants.NUMPLAYERPIECES; i++) {
                 if (pieces.get(i).getAr() == validMoves.get(j).ar &&
                         pieces.get(i).getRelativeLoc() == validMoves.get(j).loc) {
                     validMoves.remove(j);
@@ -99,10 +104,14 @@ public class Player {
      */
     public String toString() {
         String s = "";
-        for (int i = 0; i < numPieces; i++) {
+        for (int i = 0; i < Constants.NUMPLAYERPIECES; i++) {
             s += pieces.get(i).toString() + "  |  ";
         }
         return s;
+    }
+
+    public int getPlayerNum() {
+        return playerNum;
     }
 
 }
