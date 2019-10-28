@@ -51,10 +51,12 @@ public class Player {
             System.out.print("Move to finish (0) or continue around board (1): ");
             int choice = sc.nextInt();
             pieces.get(i).setArLoc(validMoves.get(choice));
+            board.update(pieces.get(i));
             return 1;
 
         } else if (validMoves.size() == 1)  {
             pieces.get(i).setArLoc(validMoves.get(0));
+            board.update(pieces.get(i));
             return 1;
         }
         System.out.println("No valid moves");

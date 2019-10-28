@@ -52,11 +52,12 @@ public class Board {
     //TODO setpiece should knock pieces back
     public void update(Piece p) {
         if (p.getAr() == Area.HOME) {
-            homes.get(p.getPlayerNum()).get(p.getAbsoluteLoc()).setPiece(p);
+            int x = p.getPlayerNum();
+            homes.get(p.getPlayerNum()).get(p.getAbsoluteLoc()-1).setPiece(p);
         } else if (p.getAr() == Area.BOARD) {
-            board.get(p.getAbsoluteLoc()).setPiece(p);
+            board.get(p.getAbsoluteLoc()-1).setPiece(p);
         } else {
-            finishes.get(p.getPlayerNum()).get(p.getAbsoluteLoc()).setPiece(p);
+            finishes.get(p.getPlayerNum()).get(p.getAbsoluteLoc()-1).setPiece(p);
         }
     }
 
@@ -73,8 +74,30 @@ public class Board {
         return null;
     }
 
+    /**
+     * Overloaded toString for board
+     * @return s the representation of the board as a string
+     */
+    public String toString() {
+        String s = "";
+        String sHomes = "";
+        String sFinishes = "";
+        String sBoard = "Board: ";
+        for (int i = 0; i < Constants.NUMPLAYERS; i++) {
+            sHomes += "Homes " + i + ": " + homes.get(i).toString() + "\n";
+        }
+        for (int i = 0; i < Constants.NUMPLAYERS; i++) {
+            sFinishes += "Finishes " + i + ": " + finishes.get(i).toString() + "\n";
+        }
 
-
-
-
+        for (int i = 0; i < Constants.BOARDSIZE; i++) {
+            if (board.get(i).getPiece() == null) {
+                sBoard += " | ";
+            } else {
+                sBoard += board.get(i).getPiece().getPlayerNum() + " | ";
+            }
+        }
+        sBoard += "\n";
+        return sHomes + "\n" + sBoard + "\n" + sFinishes;
+    }
 }

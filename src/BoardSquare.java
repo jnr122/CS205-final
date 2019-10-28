@@ -28,4 +28,18 @@ public class BoardSquare {
     public void setPiece(Piece piece) {
         this.piece = piece;
     }
+
+    /**
+     * Overloaded toString
+     * @return s
+     */
+    public String toString() {
+        String s;
+        if (this.piece == null) {
+            s = "null";
+        } else {
+            s = this.piece.toString();
+        }
+        return s;
+    }
 }

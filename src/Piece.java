@@ -77,7 +77,7 @@ public class Piece {
 
         } else  {  // tried to move directly from HOME
             if (n == 6) {
-                areaLocs.add(new AreaLoc(Area.BOARD,0));
+                areaLocs.add(new AreaLoc(Area.BOARD,1));
             } else {
                 areaLocs.add(new AreaLoc(Area.HOME, pieceNum));            }
         }
