@@ -25,7 +25,7 @@ public class Player {
         pieces = new ArrayList<>();
 
         for (int i = 0; i < numPieces; i++) {
-            pieces.add(new Piece(playerNum));
+            pieces.add(new Piece(playerNum, i));
         }
     }
 

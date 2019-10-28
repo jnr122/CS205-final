@@ -30,22 +30,19 @@ public class Piece {
     private Area ar;
     private int playerNum;
     private int playerOffset;
-    private int relativeLoc = -1;
-
-    // 28 board spaces and 4 finish spaces
-    private final int BOARDSIZE = 28;
-    private final int FINISHSIZE = 4;
-
-    private final int OFFSET = 7;
+    private int pieceNum;
+    private int relativeLoc;
 
     /**
      * Constructor
      * @param playerNum, the player's turn value
      */
-    Piece(int playerNum) {
+    Piece(int playerNum, int pieceNum) {
         ar = Area.HOME;
         this.playerNum = playerNum;
-        playerOffset = playerNum * OFFSET;
+        this.pieceNum = pieceNum + 1;
+        playerOffset = playerNum * Constants.OFFSET;
+        this.toHome();
     }
 
     /**
@@ -61,7 +58,7 @@ public class Piece {
      */
     public void toHome() {
         ar = Area.HOME;
-        relativeLoc = -1;
+        relativeLoc = -1 * pieceNum;
     }
 
 
@@ -75,12 +72,12 @@ public class Piece {
 
         // moving on board
         if (ar == Area.BOARD) {
-            if (relativeLoc + n > BOARDSIZE) { // full lap
-                if ((relativeLoc + n) - (BOARDSIZE) > FINISHSIZE) { // continuing around
-                    areaLocs.add(new AreaLoc(Area.BOARD,(relativeLoc + n) % BOARDSIZE));
+            if (relativeLoc + n > Constants.BOARDSIZE) { // full lap
+                if ((relativeLoc + n) - (Constants.BOARDSIZE) > Constants.FINISHSIZE) { // continuing around
+                    areaLocs.add(new AreaLoc(Area.BOARD,(relativeLoc + n) % Constants.BOARDSIZE));
                 } else {  // entering finish
-                    areaLocs.add(new AreaLoc(Area.FINISH,(relativeLoc + n) - (BOARDSIZE)));
-                    areaLocs.add(new AreaLoc(Area.BOARD,(relativeLoc + n) % BOARDSIZE));
+                    areaLocs.add(new AreaLoc(Area.FINISH,(relativeLoc + n) - (Constants.BOARDSIZE)));
+                    areaLocs.add(new AreaLoc(Area.BOARD,(relativeLoc + n) % Constants.BOARDSIZE));
                 }
 
             } else {
@@ -88,7 +85,7 @@ public class Piece {
             }
 
         } else if (ar == Area.FINISH) {  // moving in finish
-            if (relativeLoc + n <= FINISHSIZE) {
+            if (relativeLoc + n <= Constants.FINISHSIZE) {
                 areaLocs.add(new AreaLoc(Area.FINISH,relativeLoc + n));
             }
 
@@ -118,7 +115,7 @@ public class Piece {
      */
     public int getAbsoluteLoc() {
         if (ar == Area.BOARD) {
-            return (relativeLoc + playerOffset) % BOARDSIZE;
+            return (relativeLoc + playerOffset) % Constants.BOARDSIZE;
         }
         return relativeLoc;
     }
