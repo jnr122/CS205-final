@@ -1,7 +1,5 @@
 /**
  * BoardSquare object class
- *
- * Last modified 10/23/19
  */
 public class BoardSquare {
     private Piece piece;
@@ -26,6 +24,10 @@ public class BoardSquare {
         return arLoc;
     }
     public void setPiece(Piece piece) {
+        if (this.piece != null) {
+            this.piece.toHome();
+
+        }
         this.piece = piece;
     }
 

@@ -45,6 +45,7 @@ public class Board {
 
     }
 
+    //TODO consolidate update and remove
     /**
      * Whenever a player moves, update the board to reflect the move
      * @param p the piece being moved storing its new location
@@ -52,12 +53,30 @@ public class Board {
     //TODO setpiece should knock pieces back
     public void update(Piece p) {
         if (p.getAr() == Area.HOME) {
-            int x = p.getPlayerNum();
             homes.get(p.getPlayerNum()).get(p.getAbsoluteLoc()-1).setPiece(p);
         } else if (p.getAr() == Area.BOARD) {
+            if (board.get(p.getAbsoluteLoc()-1).getPiece() != null) {
+                board.get(p.getAbsoluteLoc()-1).getPiece().toHome();
+                update(board.get(p.getAbsoluteLoc()-1).getPiece());
+            }
             board.get(p.getAbsoluteLoc()-1).setPiece(p);
         } else {
             finishes.get(p.getPlayerNum()).get(p.getAbsoluteLoc()-1).setPiece(p);
+        }
+    }
+
+    /**
+     * Before updating position of p, old postion needs to be removed
+     * @param p
+     */
+    public void remove(Piece p) {
+        if (p.getAr() == Area.HOME) {
+            int x = p.getPlayerNum();
+            homes.get(p.getPlayerNum()).get(p.getAbsoluteLoc()-1).setPiece(null);
+        } else if (p.getAr() == Area.BOARD) {
+            board.get(p.getAbsoluteLoc()-1).setPiece(null);
+        } else {
+            finishes.get(p.getPlayerNum()).get(p.getAbsoluteLoc()-1).setPiece(null);
         }
     }
 

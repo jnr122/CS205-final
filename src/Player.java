@@ -7,8 +7,6 @@ import java.util.Scanner;
  * Represents a single player
  * Stores an array of pieces and the playerNum
  * Supports movement to and from board, and movement of piece i by n spaces
- *
- * Last modified 10/18/19
  */
 public class Player {
 
@@ -50,11 +48,13 @@ public class Player {
             Scanner sc = new Scanner(System.in);
             System.out.print("Move to finish (0) or continue around board (1): ");
             int choice = sc.nextInt();
+            board.remove(pieces.get(i));
             pieces.get(i).setArLoc(validMoves.get(choice));
             board.update(pieces.get(i));
             return 1;
 
         } else if (validMoves.size() == 1)  {
+            board.remove(pieces.get(i));
             pieces.get(i).setArLoc(validMoves.get(0));
             board.update(pieces.get(i));
             return 1;

@@ -4,23 +4,27 @@ public class main {
      */
     public static void main(String[] args) {
         Board board = new Board();
+        Player p0 = new Player(0, board);
         Player p1 = new Player(1, board);
+        Player p2 = new Player(2, board);
+        Player p3 = new Player(3, board);
 
 
         // move piece i to space n
-        p1.move(2,6);
-        p1.move(1,6);
+        p0.move(0,6);
+        p1.move(0,6);
+        p2.move(0,6);
+        p3.move(0,6);
 
-//        System.out.println(board);
-
-        p1.move(2,27);
-        p1.move(1,27);
-//        System.out.println(p1);
         System.out.println(board);
 
-        p1.move(2,1);
-        p1.move(1,3);
-//        System.out.println(p1);
+        p0.move(0,7);
+
+        System.out.println(board);
+
+
+
+
 
     }
 }

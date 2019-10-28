@@ -6,8 +6,6 @@ import java.util.ArrayList;
  * Represents a single game piece
  * Stores area, player num, offset, relativeLocation, board size, finish size
  * Supports moving to board, moving to home, moving n spaces, and getting area
- *
- * Last modified 10/18/19
  */
 
 public class Piece {
