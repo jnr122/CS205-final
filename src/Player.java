@@ -12,7 +12,6 @@ import java.util.Scanner;
  */
 public class Player {
 
-    private static final int numPieces = 4;
     ArrayList<Piece> pieces;
     private int playerNum;
     private Board board;
@@ -26,8 +25,10 @@ public class Player {
         this.board = board;
         pieces = new ArrayList<>();
 
-        for (int i = 0; i < numPieces; i++) {
-            pieces.add(new Piece(playerNum, i));
+        for (int i = 0; i < Constants.NUMPLAYERPIECES; i++) {
+            Piece p = new Piece(playerNum, i);
+            pieces.add(p);
+            board.update(p);
         }
     }
 
@@ -67,7 +68,7 @@ public class Player {
      */
     private ArrayList<AreaLoc> removeOverlap(ArrayList<AreaLoc> validMoves) {
         for (int j = validMoves.size()-1; j >= 0; j--) {
-            for (int i = 0; i < numPieces; i++) {
+            for (int i = 0; i < Constants.NUMPLAYERPIECES; i++) {
                 if (pieces.get(i).getAr() == validMoves.get(j).ar &&
                         pieces.get(i).getRelativeLoc() == validMoves.get(j).loc) {
                     validMoves.remove(j);
@@ -101,10 +102,14 @@ public class Player {
      */
     public String toString() {
         String s = "";
-        for (int i = 0; i < numPieces; i++) {
+        for (int i = 0; i < Constants.NUMPLAYERPIECES; i++) {
             s += pieces.get(i).toString() + "  |  ";
         }
         return s;
+    }
+
+    public int getPlayerNum() {
+        return playerNum;
     }
 
 }

@@ -16,14 +16,15 @@ public class BoardSquare {
         this.arLoc = new AreaLoc(ar, loc);
     }
 
+    /**
+     * Getters and setters
+     */
     public Piece getPiece() {
         return piece;
     }
-
     public AreaLoc getArLoc() {
         return arLoc;
     }
-
     public void setPiece(Piece piece) {
         this.piece = piece;
     }

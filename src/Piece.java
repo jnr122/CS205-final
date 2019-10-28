@@ -10,20 +10,6 @@ import java.util.ArrayList;
  * Last modified 10/18/19
  */
 
-class AreaLoc {
-    public Area ar;
-    int loc;
-
-    AreaLoc(Area ar, int loc) {
-        this.ar = ar;
-        this.loc = loc;
-    }
-
-    public String toString() {
-        return "Ar: " + this.ar + " Loc: " + this.loc;
-    }
-};
-
 public class Piece {
 
     // fields
@@ -58,7 +44,7 @@ public class Piece {
      */
     public void toHome() {
         ar = Area.HOME;
-        relativeLoc = -1 * pieceNum;
+        relativeLoc = pieceNum;
     }
 
 
@@ -93,7 +79,7 @@ public class Piece {
             if (n == 6) {
                 areaLocs.add(new AreaLoc(Area.BOARD,0));
             } else {
-                areaLocs.add(new AreaLoc(Area.HOME,-1));            }
+                areaLocs.add(new AreaLoc(Area.HOME, pieceNum));            }
         }
 
         return areaLocs;
@@ -120,6 +106,9 @@ public class Piece {
         return relativeLoc;
     }
 
+    public int getPlayerNum() {
+        return playerNum;
+    }
     /**
      *
      * @return relativeLoc
