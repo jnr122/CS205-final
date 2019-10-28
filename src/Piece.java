@@ -115,7 +115,7 @@ public class Piece {
      */
     public int getAbsoluteLoc() {
         if (ar == Area.BOARD) {
-            return (relativeLoc + playerOffset) % Constants.BOARDSIZE;
+            return (relativeLoc + playerOffset) % (Constants.BOARDSIZE + 1);
         }
         return relativeLoc;
     }

@@ -15,7 +15,7 @@ public class main {
         p1.move(1,27);
         System.out.println(p1);
 
-        p1.move(2,3);
+        p1.move(2,1);
         p1.move(1,3);
         System.out.println(p1);
 

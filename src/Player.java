@@ -12,7 +12,7 @@ import java.util.Scanner;
  */
 public class Player {
 
-    private static int numPieces = 4;
+    private static final int numPieces = 4;
     ArrayList<Piece> pieces;
     private int playerNum;
 

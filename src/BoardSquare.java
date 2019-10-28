@@ -5,17 +5,23 @@
  */
 public class BoardSquare {
     private Piece piece;
+    private AreaLoc arLoc;
 
     /**
      * Constructor
      * @param piece, always null when starting game
      */
-    BoardSquare(Piece piece) {
+    BoardSquare(Piece piece, Area ar, int loc) {
         this.piece = piece;
+        this.arLoc = new AreaLoc(ar, loc);
     }
 
     public Piece getPiece() {
         return piece;
+    }
+
+    public AreaLoc getArLoc() {
+        return arLoc;
     }
 
     public void setPiece(Piece piece) {
