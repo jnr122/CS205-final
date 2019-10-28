@@ -9,22 +9,21 @@ public class main {
         Player p2 = new Player(2, board);
         Player p3 = new Player(3, board);
 
+        System.out.println(board);
 
         // move piece i to space n
         p0.move(0,6);
-        p1.move(0,6);
-        p2.move(0,6);
-        p3.move(0,6);
-
-        System.out.println(board);
-
-        p0.move(0,7);
 
         System.out.println(board);
 
 
-
-
+//        p0.move(0,7);
+//
+//        System.out.println(board);
+//
+//        p0.move(0,22);
+//
+//        System.out.println(board);
 
     }
 }
