@@ -3,7 +3,9 @@ public class main {
      * Test game structure
      */
     public static void main(String[] args) {
-        Player p1 = new Player(0);
+        Board board = new Board();
+
+        Player p1 = new Player(0, board);
         System.out.println(p1);
 
         // move piece i to space n
