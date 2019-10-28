@@ -22,5 +22,6 @@ public class Constants {
     public static final int OFFSET = 7;
     public static final int NUMPLAYERS = 4;
     public static final int NUMPLAYERPIECES = 4;
+    public static final int NUMDIESIDES = 6;
 
 }

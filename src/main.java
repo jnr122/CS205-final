@@ -16,14 +16,5 @@ public class main {
 
         System.out.println(board);
 
-
-//        p0.move(0,7);
-//
-//        System.out.println(board);
-//
-//        p0.move(0,22);
-//
-//        System.out.println(board);
-
     }
 }
