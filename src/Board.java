@@ -50,7 +50,6 @@ public class Board {
      * Whenever a player moves, update the board to reflect the move
      * @param p the piece being moved storing its new location
      */
-    //TODO setpiece should knock pieces back
     public void update(Piece p) {
         if (p.getAr() == Area.HOME) {
             homes.get(p.getPlayerNum()).get(p.getAbsoluteLoc()-1).setPiece(p);
@@ -98,25 +97,46 @@ public class Board {
      * @return s the representation of the board as a string
      */
     public String toString() {
-        String s = "";
+        String lineBreak = "\n---------------------------------------------------------\n";
         String sHomes = "";
         String sFinishes = "";
         String sBoard = "Board: ";
+
+        // home
         for (int i = 0; i < Constants.NUMPLAYERS; i++) {
-            sHomes += "Homes " + i + ": " + homes.get(i).toString() + "\n";
-        }
-        for (int i = 0; i < Constants.NUMPLAYERS; i++) {
-            sFinishes += "Finishes " + i + ": " + finishes.get(i).toString() + "\n";
+            sHomes += "homes " + i + ": | ";
+            for (int j = 0; j < homes.get(i).size(); j++) {
+                if (homes.get(i).get(j).getPiece() != null) {
+                    sHomes += homes.get(i).get(j).getPiece().getPlayerNum() + " | ";
+                } else {
+                    sHomes += "- | ";
+                }
+            }
+            sHomes += "\n";
         }
 
+        // finish
+        for (int i = 0; i < Constants.NUMPLAYERS; i++) {
+            sFinishes += "finishes " + i + ": | ";
+            for (int j = 0; j < finishes.get(i).size(); j++) {
+                if (finishes.get(i).get(j).getPiece() != null) {
+                    sFinishes += finishes.get(i).get(j).getPiece().getPlayerNum() + " | ";
+                } else {
+                    sFinishes += "- | ";
+                }
+            }
+            sFinishes += "\n";
+        }
+
+        // board
         for (int i = 0; i < Constants.BOARDSIZE; i++) {
             if (board.get(i).getPiece() == null) {
-                sBoard += " | ";
+                sBoard += "- | ";
             } else {
                 sBoard += board.get(i).getPiece().getPlayerNum() + " | ";
             }
         }
         sBoard += "\n";
-        return sHomes + "\n" + sBoard + "\n" + sFinishes;
+        return sHomes + "\n" + sBoard + "\n" + sFinishes + lineBreak;
     }
 }

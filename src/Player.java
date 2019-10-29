@@ -84,6 +84,20 @@ public class Player {
     }
 
     /**
+     * Check if all of a players pieces are in a given area
+     * @param ar area to check
+     * @return true if all pieces are in a given area, else false
+     */
+    public boolean allPiecesInArea(Area ar) {
+        for (int i = 0; i < Constants.NUMPLAYERPIECES; i++) {
+            if (pieces.get(i).getAr() != ar) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * Move piece i to board
      * @param i piece index
      */
