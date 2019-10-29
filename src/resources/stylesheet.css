@@ -1,0 +1,55 @@
+@font-face {
+    font-family: Lovelo;
+    src: url('fonts/Lovelo-LineLight.ttf');
+}
+
+@font-face {
+    font-family: Sprague;
+    src: url('fonts/sprague.ttf');
+}
+
+@font-face {
+    font-family: Bavro;
+    src: url('fonts/Bavro-Regular.otf');
+}
+
+
+.root{
+    -fx-font-size: 16pt;
+    -fx-font-family: Bavro;
+    -fx-base: #34495e;
+    -fx-background: #34495e;
+}
+
+.labelTitle{
+    -fx-alignment: center;
+    -fx-font-size: 100pt;
+    -fx-text-fill: #16a085;
+    -fx-font-family: Sprague;
+}
+
+
+.button{
+    -fx-border-color: transparent;
+    -fx-border-radius: 1;
+    -fx-padding: 9 9 9 9;
+    -fx-border-width: 0;
+    -fx-background-radius: 1;
+    -fx-background-color: transparent;
+    -fx-font-family: Bavro;
+    -fx-font-size: 25pt;
+    -fx-text-fill: #1abc9c;
+}
+
+.button:focused {
+    -fx-border-color: transparent;
+    -fx-border-width: 1, 1;
+    -fx-border-style: solid;
+    -fx-border-radius: 0, 0;
+    -fx-border-insets: 1 1 1 1, 0;
+}
+
+.button:pressed {
+    -fx-background-color: transparent;
+    -fx-text-fill: #16a085;
+}
