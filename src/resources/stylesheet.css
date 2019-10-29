@@ -53,3 +53,10 @@
     -fx-background-color: transparent;
     -fx-text-fill: #16a085;
 }
+
+
+.boardSquare {
+    -fx-background-color: #fff;
+    -fx-fill: #fff;
+    -fx-cell-hover-color: #fff;
+}

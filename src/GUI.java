@@ -38,7 +38,9 @@ public class GUI extends Application{
         homePane.setCenter(homeButtons());
         homePane.setTop(title());
 
-        GamePane.setCenter(BoardGUI)
+        BoardGUI board = new BoardGUI(stage);
+
+        GamePane.setCenter(board);
 
         homeScene.getStylesheets().add("resources/stylesheet.css");
         GameScene.getStylesheets().add("resources/stylesheet.css");
