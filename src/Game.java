@@ -30,7 +30,7 @@ public class Game {
      */
     public void run() {
         int turnCount = 0;
-        while (true) {
+        while (!gameOver) {
             turn(turnCount);
             turnCount += 1;
             turnCount %= 4;
@@ -49,10 +49,20 @@ public class Game {
 
         roll = die.roll();
         System.out.println("Roll = " + roll + ". Player " + playerNum + ", Which piece would you like to move (0), (1), (2), (3) ");
-        toMove = sc.nextInt();
 
-        // result of -1 means no valid moves
-        result = players.get(playerNum).move(toMove, roll);
+        // players can move no pieces
+        if (players.get(playerNum).allPiecesInArea(Area.HOME) && roll != 6) {
+            System.out.println("Can't move anything from home");
+        } else {
+            toMove = sc.nextInt();
+            //
+            result = players.get(playerNum).move(toMove, roll);
+
+        }
+
+        if (players.get(playerNum).allPiecesInArea(Area.FINISH)) {
+            gameOver = true;
+        }
         System.out.println(board);
     }
 
