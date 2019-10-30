@@ -51,36 +51,41 @@ public class Piece {
         this.relativeLoc = arLoc.loc;
     }
 
+    /**
+     * Calculate all valid moves given a roll of n
+     * @param n
+     * @return all valid moves
+     */
     public ArrayList<AreaLoc> getValidMoves(int n) {
-        ArrayList<AreaLoc> areaLocs = new ArrayList<>();
+        ArrayList<AreaLoc> validMoves = new ArrayList<>();
 
         // moving on board
         if (ar == Area.BOARD) {
             if (relativeLoc + n > Constants.BOARDSIZE) { // full lap
                 if ((relativeLoc + n) - (Constants.BOARDSIZE) > Constants.FINISHSIZE) { // continuing around
                     // is relativeLoc initialized to 0 or 1
-                    areaLocs.add(new AreaLoc(Area.BOARD,((relativeLoc + n + 0) % Constants.BOARDSIZE)));
+                    validMoves.add(new AreaLoc(Area.BOARD,((relativeLoc + n + 0) % Constants.BOARDSIZE)));
                 } else {  // entering finish
-                    areaLocs.add(new AreaLoc(Area.FINISH,(relativeLoc + n) - (Constants.BOARDSIZE)));
-                    areaLocs.add(new AreaLoc(Area.BOARD,(relativeLoc + n) % Constants.BOARDSIZE));
+                    validMoves.add(new AreaLoc(Area.FINISH,(relativeLoc + n) - (Constants.BOARDSIZE)));
+                    validMoves.add(new AreaLoc(Area.BOARD,(relativeLoc + n) % Constants.BOARDSIZE));
                 }
 
             } else {
-                areaLocs.add(new AreaLoc(Area.BOARD,relativeLoc + n)); // still completing lap
+                validMoves.add(new AreaLoc(Area.BOARD,relativeLoc + n)); // still completing lap
             }
 
         } else if (ar == Area.FINISH) {  // moving in finish
             if (relativeLoc + n <= Constants.FINISHSIZE) {
-                areaLocs.add(new AreaLoc(Area.FINISH,relativeLoc + n));
+                validMoves.add(new AreaLoc(Area.FINISH,relativeLoc + n));
             }
 
         } else  {  // tried to move directly from HOME
             if (n == Constants.FROMHOMETHRESHOLD) {
-                areaLocs.add(new AreaLoc(Area.BOARD,1));
+                validMoves.add(new AreaLoc(Area.BOARD,1));
             }
         }
 
-        return areaLocs;
+        return validMoves;
     }
 
     /**
