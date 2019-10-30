@@ -42,10 +42,11 @@ public class Board {
         for (int i = 1; i <= Constants.BOARDSIZE; i++) {
             board.add(new BoardSquare(null, Area.BOARD, i));
         }
-
     }
 
     //TODO consolidate update and remove
+
+    //possible off by 1 error, believe its been fixed
     /**
      * Whenever a player moves, update the board to reflect the move
      * @param p the piece being moved storing its new location

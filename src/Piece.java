@@ -58,7 +58,7 @@ public class Piece {
         if (ar == Area.BOARD) {
             if (relativeLoc + n > Constants.BOARDSIZE) { // full lap
                 if ((relativeLoc + n) - (Constants.BOARDSIZE) > Constants.FINISHSIZE) { // continuing around
-                    areaLocs.add(new AreaLoc(Area.BOARD,(relativeLoc + n) % Constants.BOARDSIZE));
+                    areaLocs.add(new AreaLoc(Area.BOARD,((relativeLoc + n) % Constants.BOARDSIZE) + 1));
                 } else {  // entering finish
                     areaLocs.add(new AreaLoc(Area.FINISH,(relativeLoc + n) - (Constants.BOARDSIZE)));
                     areaLocs.add(new AreaLoc(Area.BOARD,(relativeLoc + n) % Constants.BOARDSIZE));
@@ -74,10 +74,9 @@ public class Piece {
             }
 
         } else  {  // tried to move directly from HOME
-            if (n == 6) {
+            if (n == Constants.FROMHOMETHRESHOLD) {
                 areaLocs.add(new AreaLoc(Area.BOARD,1));
-            } else {
-                areaLocs.add(new AreaLoc(Area.HOME, pieceNum));            }
+            }
         }
 
         return areaLocs;

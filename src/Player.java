@@ -64,6 +64,22 @@ public class Player {
     }
 
     /**
+     * Return movable piece indices given roll n
+     * @param n
+     * @return
+     */
+    public ArrayList<Integer> getMovablePieces(int n) {
+        ArrayList<Integer> movablePieces = new ArrayList<>();
+
+        for (int i = 0; i < Constants.NUMPLAYERPIECES; i++) {
+            if (pieces.get(i).getValidMoves(n).size() > 0) {
+                movablePieces.add(i);
+            }
+        }
+        return movablePieces;
+    }
+
+    /**
      * Take list of valid moves and remove moves that would overlap with player's other pieces
      * @param validMoves
      * @return edited list of valid moves

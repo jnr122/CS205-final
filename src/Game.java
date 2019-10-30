@@ -9,6 +9,7 @@ public class Game {
     // Fields
     private Board board;
     private ArrayList<Player> players;
+    private ArrayList<Integer> movablePieces;
     private Die die;
     private boolean gameOver;
 
@@ -18,6 +19,7 @@ public class Game {
     public Game() {
         gameOver = false;
         players = new ArrayList<>();
+        movablePieces = new ArrayList<>();
         board = new Board();
         die = new Die(Constants.NUMDIESIDES);
         for (int i = 0; i < Constants.NUMPLAYERS; i++) {
@@ -33,7 +35,7 @@ public class Game {
         while (!gameOver) {
             turn(turnCount);
             turnCount += 1;
-            turnCount %= 4;
+            turnCount %= Constants.NUMPLAYERS;
         }
     }
 
@@ -45,19 +47,32 @@ public class Game {
         int roll;
         int toMove;
         int result;
+
         Scanner sc = new Scanner(System.in);
 
         roll = die.roll();
-        System.out.println("Roll = " + roll + ". Player " + playerNum + ", Which piece would you like to move (0), (1), (2), (3) ");
+        //TODO get rid of now redundant move validator in Player.move
+        movablePieces = players.get(playerNum).getMovablePieces(roll);
 
         // players can move no pieces
-        if (players.get(playerNum).allPiecesInArea(Area.HOME) && roll != 6) {
-            System.out.println("Can't move anything from home");
+        if (movablePieces.size() == 0) {
+            System.out.print("Roll = " + roll + ". Player " + playerNum + " can't move anything. (Enter) to continue: ");
+            sc.next();
         } else {
+            String s = "";
+            for (int i = 0; i < movablePieces.size(); i++) {
+                s += "(" + movablePieces.get(i) + ") ";
+            }
+            System.out.println("Roll = " + roll + ". Player " + playerNum + ", Which piece would you like to move " + s);
             toMove = sc.nextInt();
-            //
             result = players.get(playerNum).move(toMove, roll);
 
+            // player tried something invalid, should get to try again
+            while (result == -1) {
+                System.out.println("Invalid pick, try again: " + s);
+                toMove = sc.nextInt();
+                result = players.get(playerNum).move(toMove, roll);
+            }
         }
 
         if (players.get(playerNum).allPiecesInArea(Area.FINISH)) {
