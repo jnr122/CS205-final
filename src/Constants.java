@@ -15,13 +15,13 @@ class AreaLoc {
 /**
  * Keep track of constants
  */
-public class Constants {
-    public static final int BOARDSIZE = 28;
-    public static final int FINISHSIZE = 4;
-    public static final int HOMESIZE = 4;
-    public static final int OFFSET = 7;
-    public static final int NUMPLAYERS = 4;
-    public static final int NUMPLAYERPIECES = 4;
-    public static final int NUMDIESIDES = 6;
-    public static final int FROMHOMETHRESHOLD = 6;
+class Constants {
+    static final int BOARDSIZE = 28;
+    static final int FINISHSIZE = 4;
+    static final int HOMESIZE = 4;
+    static final int OFFSET = 7;
+    static final int NUMPLAYERS = 4;
+    static final int NUMPLAYERPIECES = 4;
+    static final int NUMDIESIDES = 6;
+    static final int FROMHOMETHRESHOLD = 6;
 }

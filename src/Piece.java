@@ -63,8 +63,8 @@ public class Piece {
         if (ar == Area.BOARD) {
             if (relativeLoc + n > Constants.BOARDSIZE) { // full lap
                 if ((relativeLoc + n) - (Constants.BOARDSIZE) > Constants.FINISHSIZE) { // continuing around
-                    // is relativeLoc initialized to 0 or 1
-                    validMoves.add(new AreaLoc(Area.BOARD,((relativeLoc + n + 0) % Constants.BOARDSIZE)));
+
+                    validMoves.add(new AreaLoc(Area.BOARD,(1+ ((relativeLoc + n) % Constants.BOARDSIZE + 1))));
                 } else {  // entering finish
                     validMoves.add(new AreaLoc(Area.FINISH,(relativeLoc + n) - (Constants.BOARDSIZE)));
                     validMoves.add(new AreaLoc(Area.BOARD,(relativeLoc + n) % Constants.BOARDSIZE));
@@ -107,7 +107,7 @@ public class Piece {
      */
     public int getAbsoluteLoc() {
         if (ar == Area.BOARD) {
-            return (relativeLoc + playerOffset) % (Constants.BOARDSIZE );
+            return ((relativeLoc + playerOffset) % Constants.BOARDSIZE);
         }
         return relativeLoc;
     }

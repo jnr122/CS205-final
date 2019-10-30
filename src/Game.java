@@ -13,11 +13,13 @@ public class Game {
     private Die die;
     private int winner;
     private boolean gameOver;
+    Saver saver;
 
     /**
      * Constructor
      */
     public Game() {
+        saver = new Saver("src/saveData/save.txt");
         gameOver = false;
         int winner = -1;
         players = new ArrayList<>();
@@ -37,21 +39,19 @@ public class Game {
         int turnCount = 0;
         while (!gameOver) {
             turn(turnCount);
-
             // until the game is over, rotate turns
             if (!gameOver) {
                 turnCount += 1;
                 turnCount %= Constants.NUMPLAYERS;
             }
+            saver.save(board, turnCount);
         }
 
         // if the game is over because a winner was selected, win
         if (winner != -1) {
             win(winner);
         }
-
         // else game was stopped for another reason
-
     }
 
     /**
@@ -67,7 +67,6 @@ public class Game {
         System.out.println(board);
 
         roll = die.roll();
-        //TODO get rid of now redundant move validator in Player.move
         movablePieces = players.get(playerNum).getMovablePieces(roll);
 
         // players can move no pieces
