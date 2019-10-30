@@ -26,7 +26,6 @@ public class BoardSquare {
     public void setPiece(Piece piece) {
         if (this.piece != null) {
             this.piece.toHome();
-
         }
         this.piece = piece;
     }

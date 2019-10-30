@@ -108,9 +108,10 @@ public class Board {
             sHomes += "homes " + i + ": | ";
             for (int j = 0; j < homes.get(i).size(); j++) {
                 if (homes.get(i).get(j).getPiece() != null) {
-                    sHomes += homes.get(i).get(j).getPiece().getPlayerNum() + " | ";
+                    sHomes += "p" + homes.get(i).get(j).getPiece().getPlayerNum() + "-" +
+                            homes.get(i).get(j).getPiece().getPieceNum()+  " | ";
                 } else {
-                    sHomes += "- | ";
+                    sHomes += "-- | ";
                 }
             }
             sHomes += "\n";
@@ -121,9 +122,10 @@ public class Board {
             sFinishes += "finishes " + i + ": | ";
             for (int j = 0; j < finishes.get(i).size(); j++) {
                 if (finishes.get(i).get(j).getPiece() != null) {
-                    sFinishes += finishes.get(i).get(j).getPiece().getPlayerNum() + " | ";
+                    sFinishes += "p" + finishes.get(i).get(j).getPiece().getPlayerNum() + "-" +
+                            finishes.get(i).get(j).getPiece().getPieceNum()+ " | ";
                 } else {
-                    sFinishes += "- | ";
+                    sFinishes += "-- | ";
                 }
             }
             sFinishes += "\n";
@@ -134,10 +136,24 @@ public class Board {
             if (board.get(i).getPiece() == null) {
                 sBoard += "- | ";
             } else {
-                sBoard += board.get(i).getPiece().getPlayerNum() + " | ";
+                sBoard +=  "p" + board.get(i).getPiece().getPlayerNum() + "-"
+                        + board.get(i).getPiece().getPieceNum() + " | ";
             }
         }
         sBoard += "\n";
         return sHomes + "\n" + sBoard + "\n" + sFinishes + lineBreak;
+    }
+
+    /**
+     * Getters for various parts of the board
+     */
+    public ArrayList<ArrayList<BoardSquare>> getHomes() {
+            return homes;
+    }
+    public ArrayList<ArrayList<BoardSquare>> getFinishes() {
+        return finishes;
+    }
+    public ArrayList<BoardSquare> getBoard() {
+        return board;
     }
 }

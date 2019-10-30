@@ -11,6 +11,7 @@ public class Game {
     private ArrayList<Player> players;
     private ArrayList<Integer> movablePieces;
     private Die die;
+    private int winner;
     private boolean gameOver;
 
     /**
@@ -18,6 +19,7 @@ public class Game {
      */
     public Game() {
         gameOver = false;
+        int winner = -1;
         players = new ArrayList<>();
         movablePieces = new ArrayList<>();
         board = new Board();
@@ -31,12 +33,25 @@ public class Game {
      * Main game loop
      */
     public void run() {
+        // start turn with player0
         int turnCount = 0;
         while (!gameOver) {
             turn(turnCount);
-            turnCount += 1;
-            turnCount %= Constants.NUMPLAYERS;
+
+            // until the game is over, rotate turns
+            if (!gameOver) {
+                turnCount += 1;
+                turnCount %= Constants.NUMPLAYERS;
+            }
         }
+
+        // if the game is over because a winner was selected, win
+        if (winner != -1) {
+            win(winner);
+        }
+
+        // else game was stopped for another reason
+
     }
 
     /**
@@ -49,6 +64,7 @@ public class Game {
         int result;
 
         Scanner sc = new Scanner(System.in);
+        System.out.println(board);
 
         roll = die.roll();
         //TODO get rid of now redundant move validator in Player.move
@@ -56,7 +72,7 @@ public class Game {
 
         // players can move no pieces
         if (movablePieces.size() == 0) {
-            System.out.print("Roll = " + roll + ". Player " + playerNum + " can't move anything. (Enter) to continue: ");
+            System.out.print("Roll = " + roll + ". Player " + playerNum + " can't move anything. (c) to continue: ");
             sc.next();
         } else {
             String s = "";
@@ -77,8 +93,16 @@ public class Game {
 
         if (players.get(playerNum).allPiecesInArea(Area.FINISH)) {
             gameOver = true;
+            winner = playerNum;
         }
-        System.out.println(board);
+    }
+
+    /**
+     * playerNum wins
+     * @param playerNum
+     */
+    private void win(int playerNum) {
+        System.out.println("Congratulations player " + playerNum);
     }
 
     /**

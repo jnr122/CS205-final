@@ -58,7 +58,8 @@ public class Piece {
         if (ar == Area.BOARD) {
             if (relativeLoc + n > Constants.BOARDSIZE) { // full lap
                 if ((relativeLoc + n) - (Constants.BOARDSIZE) > Constants.FINISHSIZE) { // continuing around
-                    areaLocs.add(new AreaLoc(Area.BOARD,((relativeLoc + n) % Constants.BOARDSIZE) + 1));
+                    // is relativeLoc initialized to 0 or 1
+                    areaLocs.add(new AreaLoc(Area.BOARD,((relativeLoc + n + 0) % Constants.BOARDSIZE)));
                 } else {  // entering finish
                     areaLocs.add(new AreaLoc(Area.FINISH,(relativeLoc + n) - (Constants.BOARDSIZE)));
                     areaLocs.add(new AreaLoc(Area.BOARD,(relativeLoc + n) % Constants.BOARDSIZE));
@@ -91,6 +92,9 @@ public class Piece {
     }
 
     /**
+     * Getters
+     */
+    /**
      * Computes the absolute location of the piece on the board using its relative location
      *
      * If the piece is in HOME or FINISH absoluteLoc = relativeLoc
@@ -98,18 +102,16 @@ public class Piece {
      */
     public int getAbsoluteLoc() {
         if (ar == Area.BOARD) {
-            return (relativeLoc + playerOffset) % (Constants.BOARDSIZE + 1);
+            return (relativeLoc + playerOffset) % (Constants.BOARDSIZE );
         }
         return relativeLoc;
     }
-
+    public int getPieceNum() {
+        return pieceNum-1;
+    }
     public int getPlayerNum() {
         return playerNum;
     }
-    /**
-     *
-     * @return relativeLoc
-     */
     public int getRelativeLoc() {
         return relativeLoc;
     }
