@@ -6,54 +6,111 @@ import javafx.scene.shape.*;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class BoardGUI extends BorderPane {
+public class BoardGUI {
 
     private Stage window;
-    private BorderPane mainPane = new BorderPane();
-    private BorderPane board = new BorderPane();
+    private GridPane board;
 
 
-    public BoardGUI(Stage stage){
-        this.window = stage;
-
-        setSquares(this.board);
-        mainPane.setCenter(this.board);
-
-
+    public BoardGUI(){
+        board = new GridPane();
+        board.setVgap(5);
+        board.setHgap(5);
+        setSquares(board);
     }
 
 
-    private void setSquares(BorderPane board){
+    private void setSquares(GridPane board){
 
-        HBox topRow = new HBox(7);
-        topRow.setPadding(new Insets(20,20,20,20));
-        topRow.setAlignment(Pos.CENTER);
-        HBox botRow = new HBox(7);
-        botRow.setPadding(new Insets(20,20,20,20));
-        botRow.setAlignment(Pos.CENTER);
-        VBox leftCol= new VBox(7);
-        VBox rightCol = new VBox(7);
 
-        for (int i=0; i<=7; i++){
+        //home 1
+        for (int i=0; i<=3; i++) {
             Circle boardSqaure = new Circle();
-            boardSqaure.setId("boardSquare");
-            boardSqaure.setCenterX(100.0f);
-            boardSqaure.setCenterY(100.0f);
-            boardSqaure.setRadius(50.0f);
-            topRow.getChildren().addAll(boardSqaure);
-            botRow.getChildren().addAll(boardSqaure);
-            leftCol.getChildren().addAll(boardSqaure);
-            rightCol.getChildren().addAll(boardSqaure);
-
-            board.setTop(topRow);
-            board.setBottom(botRow);
-            board.setRight(rightCol);
-            board.setLeft(leftCol);
+            boardSqaure.getStyleClass().add("boardSquare");
+            boardSqaure.setCenterX(10.0f);
+            boardSqaure.setCenterY(10.0f);
+            boardSqaure.setRadius(30.0f);
+            board.add(boardSqaure, i, 3-i);
         }
+
+        //home 2
+        for (int i=0; i<=3; i++) {
+            Circle boardSqaure = new Circle();
+            boardSqaure.getStyleClass().add("boardSquare");
+            boardSqaure.setCenterX(10.0f);
+            boardSqaure.setCenterY(10.0f);
+            boardSqaure.setRadius(30.0f);
+            board.add(boardSqaure, i, 9+i);
+        }
+
+        //home 3
+        for (int i=0; i<=3; i++) {
+            Circle boardSqaure = new Circle();
+            boardSqaure.getStyleClass().add("boardSquare");
+            boardSqaure.setCenterX(10.0f);
+            boardSqaure.setCenterY(10.0f);
+            boardSqaure.setRadius(30.0f);
+            board.add(boardSqaure, 12-i, 9+i);
+        }
+
+        //home 4
+        for (int i=0; i<=3; i++) {
+            Circle boardSqaure = new Circle();
+            boardSqaure.getStyleClass().add("boardSquare");
+            boardSqaure.setCenterX(10.0f);
+            boardSqaure.setCenterY(10.0f);
+            boardSqaure.setRadius(30.0f);
+            board.add(boardSqaure, 9+i, i);
+        }
+
+        // top row of spaces
+        for (int i=0; i<7; i++) {
+            Circle boardSqaure = new Circle();
+            boardSqaure.getStyleClass().add("boardSquare");
+            boardSqaure.setCenterX(10.0f);
+            boardSqaure.setCenterY(10.0f);
+            boardSqaure.setRadius(30.0f);
+            board.add(boardSqaure, 2, 3+i);
+        }
+
+        // bottom row of spaces
+        for (int i=0; i<7; i++) {
+            Circle boardSqaure = new Circle();
+            boardSqaure.getStyleClass().add("boardSquare");
+            boardSqaure.setCenterX(10.0f);
+            boardSqaure.setCenterY(10.0f);
+            boardSqaure.setRadius(30.0f);
+            board.add(boardSqaure, 10, 3+i);
+        }
+
+        // left column of spaces
+        for (int i=0; i<7; i++) {
+            Circle boardSqaure = new Circle();
+            boardSqaure.getStyleClass().add("boardSquare");
+            boardSqaure.setCenterX(10.0f);
+            boardSqaure.setCenterY(10.0f);
+            boardSqaure.setRadius(30.0f);
+            board.add(boardSqaure, 3+i, 2);
+        }
+
+        // right column of spaces
+        for (int i=0; i<7; i++) {
+            Circle boardSqaure = new Circle();
+            boardSqaure.getStyleClass().add("boardSquare");
+            boardSqaure.setCenterX(10.0f);
+            boardSqaure.setCenterY(10.0f);
+            boardSqaure.setRadius(30.0f);
+            board.add(boardSqaure, 3+i, 10);
+        }
+
+    }
+
+    public GridPane getBoard(){
+        return this.board;
     }
 }
