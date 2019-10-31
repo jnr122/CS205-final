@@ -65,7 +65,7 @@ public class Game {
      * Simulate a single turn for player playerNum
      * @param playerNum
      */
-    public void turn(int playerNum) {
+    private void turn(int playerNum) {
         int roll;
         int toMove;
         int result;
@@ -124,7 +124,7 @@ public class Game {
      * @param turn
      * @return 1 on success, -1 on failure
      */
-    public int save(int turn) {
+    private int save(int turn) {
         File file = new File(filePath);
         FileWriter fr;
         try {
@@ -139,6 +139,15 @@ public class Game {
             return -1;
         }
     }
+
+    /**
+     * Load saved game
+     */
+    private void load() {
+
+    }
+
+
 
     /**
      * Overloaded toString

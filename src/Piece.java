@@ -30,6 +30,16 @@ public class Piece {
     }
 
     /**
+     * Overloaded constructor to accept saved areaLoc
+     * @param playerNum, the player's turn value, and saved area and absoluteLoc
+     */
+    Piece(int playerNum, int pieceNum, Area ar, int absoluteLoc) {
+        this.playerNum = playerNum;
+        this.pieceNum = pieceNum + 1;
+        playerOffset = playerNum * Constants.OFFSET;
+    }
+
+    /**
      * Send piece to board and initialize at relative '0'
      */
     public void toBoard() {

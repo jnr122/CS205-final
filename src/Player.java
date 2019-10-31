@@ -17,7 +17,7 @@ public class Player {
 
     /**
      * Constructor
-     * @param playerNum the player's turn value
+     * @param playerNum the player's turn value, board
      */
     Player(int playerNum, Board board) {
         this.playerNum = playerNum;
@@ -29,6 +29,17 @@ public class Player {
             pieces.add(p);
             board.update(p);
         }
+    }
+
+    /**
+     * Overloaded constructor for loading player
+     * @param playerNum the player's turn value, board, and and constructed pieces
+     */
+    Player(int playerNum, Board board, ArrayList<Piece> pieces) {
+        this.playerNum = playerNum;
+        this.board = board;
+        pieces = new ArrayList<>();
+        this.pieces = pieces;
     }
 
     /**
