@@ -1,8 +1,10 @@
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
-
 /**
  * Representation of the game
+ *
+ * To simulate, comment lines
  */
 public class Game {
 
@@ -14,14 +16,16 @@ public class Game {
     private int winner;
     private boolean gameOver;
     Saver saver;
-
+    Random rand;
     /**
      * Constructor
      */
     public Game() {
+
         saver = new Saver("src/saveData/save.txt");
         gameOver = false;
         int winner = -1;
+        rand = new Random();
         players = new ArrayList<>();
         movablePieces = new ArrayList<>();
         board = new Board();
@@ -72,14 +76,21 @@ public class Game {
         // players can move no pieces
         if (movablePieces.size() == 0) {
             System.out.print("Roll = " + roll + ". Player " + playerNum + " can't move anything. (c) to continue: ");
-            sc.next();
+            if (!Constants.RUNSIM) {
+                sc.next();
+            }
         } else {
             String s = "";
             for (int i = 0; i < movablePieces.size(); i++) {
                 s += "(" + movablePieces.get(i) + ") ";
             }
             System.out.println("Roll = " + roll + ". Player " + playerNum + ", Which piece would you like to move " + s);
-            toMove = sc.nextInt();
+
+            if (!Constants.RUNSIM) {
+                toMove = sc.nextInt();
+            } else {
+                toMove = movablePieces.get(rand.nextInt(movablePieces.size()));// + 1;movablePieces.get(0);
+            }
             result = players.get(playerNum).move(toMove, roll);
 
             // player tried something invalid, should get to try again
@@ -101,6 +112,7 @@ public class Game {
      * @param playerNum
      */
     private void win(int playerNum) {
+        System.out.println(board);
         System.out.println("Congratulations player " + playerNum);
     }
 
