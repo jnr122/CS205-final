@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -15,14 +18,14 @@ public class Game {
     private Die die;
     private int winner;
     private boolean gameOver;
-    Saver saver;
+    private String filePath;
     Random rand;
+
     /**
      * Constructor
      */
     public Game() {
-
-        saver = new Saver("src/saveData/save.txt");
+        filePath = "src/saveData/save.txt";
         gameOver = false;
         int winner = -1;
         rand = new Random();
@@ -48,7 +51,7 @@ public class Game {
                 turnCount += 1;
                 turnCount %= Constants.NUMPLAYERS;
             }
-            saver.save(board, turnCount);
+            save(turnCount);
         }
 
         // if the game is over because a winner was selected, win
@@ -89,7 +92,7 @@ public class Game {
             if (!Constants.RUNSIM) {
                 toMove = sc.nextInt();
             } else {
-                toMove = movablePieces.get(rand.nextInt(movablePieces.size()));// + 1;movablePieces.get(0);
+                toMove = movablePieces.get(rand.nextInt(movablePieces.size()));
             }
             result = players.get(playerNum).move(toMove, roll);
 
@@ -114,6 +117,27 @@ public class Game {
     private void win(int playerNum) {
         System.out.println(board);
         System.out.println("Congratulations player " + playerNum);
+    }
+
+    /**
+     * Write string representation of board
+     * @param turn
+     * @return 1 on success, -1 on failure
+     */
+    public int save(int turn) {
+        File file = new File(filePath);
+        FileWriter fr;
+        try {
+            fr = new FileWriter(file);
+            fr.write(board.toString());
+            fr.write(Integer.toString(turn));
+            fr.close();
+            return 1;
+
+        } catch (IOException e) {
+            System.out.println("Couldn't find file");
+            return -1;
+        }
     }
 
     /**

@@ -55,6 +55,7 @@ public class Board {
         if (p.getAr() == Area.HOME) {
             homes.get(p.getPlayerNum()).get(p.getAbsoluteLoc()-1).setPiece(p);
         } else if (p.getAr() == Area.BOARD) {
+            // should only get values [1,28]
             if (board.get(p.getAbsoluteLoc()-1).getPiece() != null) {
                 board.get(p.getAbsoluteLoc()-1).getPiece().toHome();
                 update(board.get(p.getAbsoluteLoc()-1).getPiece());

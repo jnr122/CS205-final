@@ -63,7 +63,7 @@ public class Piece {
         if (ar == Area.BOARD) {
             if (relativeLoc + n > Constants.BOARDSIZE) { // full lap
                 if ((relativeLoc + n) - (Constants.BOARDSIZE) > Constants.FINISHSIZE) { // continuing around
-
+                    // should only be values [1,28]
                     validMoves.add(new AreaLoc(Area.BOARD,(((relativeLoc + n) % Constants.BOARDSIZE))));
                 } else {  // entering finish
                     validMoves.add(new AreaLoc(Area.FINISH,(relativeLoc + n) - (Constants.BOARDSIZE)));
@@ -81,7 +81,6 @@ public class Piece {
 
         } else  {  // tried to move directly from HOME
             if (n == Constants.FROMHOMETHRESHOLD) {
-
                 validMoves.add(new AreaLoc(Area.BOARD,1));
             }
         }
@@ -108,9 +107,9 @@ public class Piece {
      */
     public int getAbsoluteLoc() {
         if (ar == Area.BOARD) {
-//            return ((relativeLoc + playerOffset) % Constants.BOARDSIZE);
+            // should only return values [1,28]
             if (((relativeLoc + playerOffset) % Constants.BOARDSIZE) == 0) {
-                return 1;
+                return Constants.BOARDSIZE;
             }
             return ((relativeLoc + playerOffset) % Constants.BOARDSIZE);
         }

@@ -89,27 +89,9 @@ public class Player {
      * @return edited list of valid moves
      */
     private ArrayList<AreaLoc> removeOverlap(ArrayList<AreaLoc> validMoves) {
-        System.out.println("\n---------");
-//        for (int j = validMoves.size()-1; j >= 0; j--) {
-////        for (int j = 0; j < validMoves.size()-1; j++) {
-//
-//            for (int i = 0; i < Constants.NUMPLAYERPIECES; i++) {
-//                System.out.println("size: " + validMoves.size());
-//                System.out.println("j:" + j);
-//                System.out.println("i:" + i);
-//                if (pieces.get(i).getAr() == validMoves.get(j).ar &&
-//                        pieces.get(i).getRelativeLoc() == validMoves.get(j).loc) {
-//                    validMoves.set(j, null);
-//                }
-//            }
-//        }
 
         for (int i = 0; i < Constants.NUMPLAYERPIECES; i++) {
             for (int j = 0; j < validMoves.size(); j++) {
-                System.out.println("size: " + validMoves.size());
-                System.out.println("j:" + j);
-                System.out.println("i:" + i);
-
                 if (validMoves.get(j) != null) {
                     if (pieces.get(i).getAr() == validMoves.get(j).ar && pieces.get(i).getRelativeLoc() == validMoves.get(j).loc) {
                         validMoves.set(j, null);
