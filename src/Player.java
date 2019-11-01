@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 /**
@@ -16,7 +17,7 @@ public class Player {
 
     /**
      * Constructor
-     * @param playerNum the player's turn value
+     * @param playerNum the player's turn value, board
      */
     Player(int playerNum, Board board) {
         this.playerNum = playerNum;
@@ -31,6 +32,17 @@ public class Player {
     }
 
     /**
+     * Overloaded constructor for loading player
+     * @param playerNum the player's turn value, board, and and constructed pieces
+     */
+    Player(int playerNum, Board board, ArrayList<Piece> pieces) {
+        this.playerNum = playerNum;
+        this.board = board;
+        pieces = new ArrayList<>();
+        this.pieces = pieces;
+    }
+
+    /**
      * Attempt to move piece
      *
      * @param i piece index
@@ -38,6 +50,7 @@ public class Player {
      * @return -1 on failure, else new loc
      */
     public int move(int i, int n) {
+        int choice;
 
         // get all valid moves
         ArrayList<AreaLoc> validMoves = pieces.get(i).getValidMoves(n);
@@ -46,8 +59,12 @@ public class Player {
         // if making a lap, user gets choice to move into finish or continue around
         if (validMoves.size() == 2) {
             Scanner sc = new Scanner(System.in);
-            System.out.print("Move to finish (0) or continue around board (1): ");
-            int choice = sc.nextInt();
+            if (!Constants.RUNSIM) {
+                System.out.print("Move to finish (0) or continue around board (1): ");
+                choice = sc.nextInt();
+            } else {
+                choice = 0;
+            }
             board.remove(pieces.get(i));
             pieces.get(i).setArLoc(validMoves.get(choice));
             board.update(pieces.get(i));
@@ -59,20 +76,18 @@ public class Player {
             board.update(pieces.get(i));
             return 1;
         }
-        System.out.println("No valid moves");
         return -1;
     }
 
     /**
      * Return movable piece indices given roll n
      * @param n
-     * @return
+     * @return movable piece indices
      */
     public ArrayList<Integer> getMovablePieces(int n) {
         ArrayList<Integer> movablePieces = new ArrayList<>();
-
         for (int i = 0; i < Constants.NUMPLAYERPIECES; i++) {
-            if (pieces.get(i).getValidMoves(n).size() > 0) {
+            if (removeOverlap(pieces.get(i).getValidMoves(n)).size() > 0) {
                 movablePieces.add(i);
             }
         }
@@ -85,16 +100,19 @@ public class Player {
      * @return edited list of valid moves
      */
     private ArrayList<AreaLoc> removeOverlap(ArrayList<AreaLoc> validMoves) {
-        for (int j = validMoves.size()-1; j >= 0; j--) {
-            for (int i = 0; i < Constants.NUMPLAYERPIECES; i++) {
-                if (pieces.get(i).getAr() == validMoves.get(j).ar &&
-                        pieces.get(i).getRelativeLoc() == validMoves.get(j).loc) {
-                    validMoves.remove(j);
-                    if (validMoves.size() == 0) {
-                        return validMoves;
+
+        for (int i = 0; i < Constants.NUMPLAYERPIECES; i++) {
+            for (int j = 0; j < validMoves.size(); j++) {
+                if (validMoves.get(j) != null) {
+                    if (pieces.get(i).getAr() == validMoves.get(j).ar && pieces.get(i).getRelativeLoc() == validMoves.get(j).loc) {
+                        validMoves.set(j, null);
                     }
                 }
             }
+        }
+
+        if (validMoves.size() > 0) {
+            validMoves.removeAll(Collections.singleton(null));
         }
         return validMoves;
     }

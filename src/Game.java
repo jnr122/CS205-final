@@ -1,8 +1,13 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
-
 /**
  * Representation of the game
+ *
+ * To simulate, comment lines
  */
 public class Game {
 
@@ -13,13 +18,17 @@ public class Game {
     private Die die;
     private int winner;
     private boolean gameOver;
+    private String filePath;
+    Random rand;
 
     /**
      * Constructor
      */
     public Game() {
+        filePath = "src/saveData/save.txt";
         gameOver = false;
         int winner = -1;
+        rand = new Random();
         players = new ArrayList<>();
         movablePieces = new ArrayList<>();
         board = new Board();
@@ -37,28 +46,26 @@ public class Game {
         int turnCount = 0;
         while (!gameOver) {
             turn(turnCount);
-
             // until the game is over, rotate turns
             if (!gameOver) {
                 turnCount += 1;
                 turnCount %= Constants.NUMPLAYERS;
             }
+            save(turnCount);
         }
 
         // if the game is over because a winner was selected, win
         if (winner != -1) {
             win(winner);
         }
-
         // else game was stopped for another reason
-
     }
 
     /**
      * Simulate a single turn for player playerNum
      * @param playerNum
      */
-    public void turn(int playerNum) {
+    private void turn(int playerNum) {
         int roll;
         int toMove;
         int result;
@@ -67,20 +74,26 @@ public class Game {
         System.out.println(board);
 
         roll = die.roll();
-        //TODO get rid of now redundant move validator in Player.move
         movablePieces = players.get(playerNum).getMovablePieces(roll);
 
         // players can move no pieces
         if (movablePieces.size() == 0) {
             System.out.print("Roll = " + roll + ". Player " + playerNum + " can't move anything. (c) to continue: ");
-            sc.next();
+            if (!Constants.RUNSIM) {
+                sc.next();
+            }
         } else {
             String s = "";
             for (int i = 0; i < movablePieces.size(); i++) {
                 s += "(" + movablePieces.get(i) + ") ";
             }
             System.out.println("Roll = " + roll + ". Player " + playerNum + ", Which piece would you like to move " + s);
-            toMove = sc.nextInt();
+
+            if (!Constants.RUNSIM) {
+                toMove = sc.nextInt();
+            } else {
+                toMove = movablePieces.get(rand.nextInt(movablePieces.size()));
+            }
             result = players.get(playerNum).move(toMove, roll);
 
             // player tried something invalid, should get to try again
@@ -102,8 +115,39 @@ public class Game {
      * @param playerNum
      */
     private void win(int playerNum) {
+        System.out.println(board);
         System.out.println("Congratulations player " + playerNum);
     }
+
+    /**
+     * Write string representation of board
+     * @param turn
+     * @return 1 on success, -1 on failure
+     */
+    private int save(int turn) {
+        File file = new File(filePath);
+        FileWriter fr;
+        try {
+            fr = new FileWriter(file);
+            fr.write(board.toString());
+            fr.write(Integer.toString(turn));
+            fr.close();
+            return 1;
+
+        } catch (IOException e) {
+            System.out.println("Couldn't find file");
+            return -1;
+        }
+    }
+
+    /**
+     * Load saved game
+     */
+    private void load() {
+
+    }
+
+
 
     /**
      * Overloaded toString

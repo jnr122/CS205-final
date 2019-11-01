@@ -44,6 +44,24 @@ public class Board {
         }
     }
 
+    /**
+     * Overloaded constructor to load board
+     * @param homes
+     * @param board
+     * @param finishes
+     */
+    public Board(ArrayList<ArrayList<BoardSquare>> homes, ArrayList<BoardSquare> board,
+                 ArrayList<ArrayList<BoardSquare>> finishes) {
+        this.homes = new ArrayList<>();
+        this.board = new ArrayList<>();
+        this.finishes = new ArrayList<>();
+
+        this.homes = homes;
+        this.board = board;
+        this.finishes = finishes;
+
+    }
+
     //TODO consolidate update and remove
 
     //possible off by 1 error, believe its been fixed
@@ -55,6 +73,7 @@ public class Board {
         if (p.getAr() == Area.HOME) {
             homes.get(p.getPlayerNum()).get(p.getAbsoluteLoc()-1).setPiece(p);
         } else if (p.getAr() == Area.BOARD) {
+            // should only get values [1,28]
             if (board.get(p.getAbsoluteLoc()-1).getPiece() != null) {
                 board.get(p.getAbsoluteLoc()-1).getPiece().toHome();
                 update(board.get(p.getAbsoluteLoc()-1).getPiece());

@@ -23,4 +23,5 @@ public class Die {
         Random rand = new Random();
         return rand.nextInt(numSides) + 1;
     }
+
 }
