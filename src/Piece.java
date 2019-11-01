@@ -37,6 +37,18 @@ public class Piece {
         this.playerNum = playerNum;
         this.pieceNum = pieceNum + 1;
         playerOffset = playerNum * Constants.OFFSET;
+        this.ar = ar;
+
+        if (this.ar == Area.BOARD) {
+            // absolute = 7, offset = 7
+            if (absoluteLoc - playerOffset < 1) {
+                this.relativeLoc = Constants.BOARDSIZE + (absoluteLoc - playerOffset);
+            }
+            this.relativeLoc = (absoluteLoc - playerOffset);
+        } else {
+            this.relativeLoc = absoluteLoc;
+        }
+
     }
 
     /**
