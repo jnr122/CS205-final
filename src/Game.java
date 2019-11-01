@@ -1,6 +1,3 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -19,13 +16,13 @@ public class Game {
     private int winner;
     private boolean gameOver;
     private String filePath;
+    Loader loader;
     Random rand;
 
     /**
      * Constructor
      */
     public Game() {
-        filePath = "src/saveData/save.txt";
         gameOver = false;
         int winner = -1;
         rand = new Random();
@@ -36,6 +33,7 @@ public class Game {
         for (int i = 0; i < Constants.NUMPLAYERS; i++) {
             players.add(new Player(i, board));
         }
+        loader = new Loader();
     }
 
     /**
@@ -51,7 +49,8 @@ public class Game {
                 turnCount += 1;
                 turnCount %= Constants.NUMPLAYERS;
             }
-            save(turnCount);
+            loader.save(turnCount, players);
+//            loader.load();
         }
 
         // if the game is over because a winner was selected, win
@@ -120,34 +119,11 @@ public class Game {
     }
 
     /**
-     * Write string representation of board
-     * @param turn
-     * @return 1 on success, -1 on failure
-     */
-    private int save(int turn) {
-        File file = new File(filePath);
-        FileWriter fr;
-        try {
-            fr = new FileWriter(file);
-            fr.write(board.toString());
-            fr.write(Integer.toString(turn));
-            fr.close();
-            return 1;
-
-        } catch (IOException e) {
-            System.out.println("Couldn't find file");
-            return -1;
-        }
-    }
-
-    /**
      * Load saved game
      */
     private void load() {
 
     }
-
-
 
     /**
      * Overloaded toString

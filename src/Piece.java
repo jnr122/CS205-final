@@ -33,21 +33,12 @@ public class Piece {
      * Overloaded constructor to accept saved areaLoc
      * @param playerNum, the player's turn value, and saved area and absoluteLoc
      */
-    Piece(int playerNum, int pieceNum, Area ar, int absoluteLoc) {
+    Piece(int playerNum, int pieceNum, Area ar, int relativeLoc) {
         this.playerNum = playerNum;
         this.pieceNum = pieceNum + 1;
         playerOffset = playerNum * Constants.OFFSET;
         this.ar = ar;
-
-        if (this.ar == Area.BOARD) {
-            // absolute = 7, offset = 7
-            if (absoluteLoc - playerOffset < 1) {
-                this.relativeLoc = Constants.BOARDSIZE + (absoluteLoc - playerOffset);
-            }
-            this.relativeLoc = (absoluteLoc - playerOffset);
-        } else {
-            this.relativeLoc = absoluteLoc;
-        }
+        this.relativeLoc = relativeLoc;
 
     }
 

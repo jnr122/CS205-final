@@ -25,4 +25,5 @@ class Constants {
     static final int NUMDIESIDES = 6;
     static final int FROMHOMETHRESHOLD = 6;
     static final boolean RUNSIM = true;
+    static final String FILEPATH = "src/saveData/save.txt";
 }

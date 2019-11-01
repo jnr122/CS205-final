@@ -11,7 +11,7 @@ import java.util.Scanner;
  */
 public class Player {
 
-    ArrayList<Piece> pieces;
+    private ArrayList<Piece> pieces;
     private int playerNum;
     private Board board;
 
@@ -160,6 +160,9 @@ public class Player {
 
     public int getPlayerNum() {
         return playerNum;
+    }
+    public ArrayList<Piece> getPieces() {
+        return pieces;
     }
 
 }
