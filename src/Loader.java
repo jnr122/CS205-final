@@ -34,7 +34,7 @@ public class Loader {
                 s.append("\n");
             }
             fr.write(s.toString());
-//            fr.write(Integer.toString(turn));
+            fr.write(Integer.toString(turn));
             fr.close();
             return 1;
 
@@ -48,12 +48,14 @@ public class Loader {
      * Load arraylists of board
      * @return all arraylists of the board
      */
-    public ArrayList<Player> load() {
+    public Game load() {
         ArrayList<Player> players = new ArrayList<>();
         Piece piece;
         ArrayList<Piece> pieces;
         String[] piecesString;
         String[] pieceString;
+        Board board = new Board();
+        int curTurn;
 
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
@@ -68,14 +70,23 @@ public class Loader {
                     pieceString = piecesString[j].split("-");
                     pieces.add(new Piece(i, j, stringToArea(pieceString[0]), Integer.parseInt(pieceString[1])));
                 }
-//                players.add(new Player())
-//                System.out.println(pieces);
+                players.add(new Player(i, board, pieces));
             }
+
+            curTurn = Integer.parseInt(br.readLine());
+
+            for (int i = 0; i < players.size(); i++) {
+                for (int j = 0; j < players.get(i).getPieces().size(); j++) {
+                    board.update(players.get(i).getPieces().get(j));
+                }
+            }
+
+            return (new Game(players, board, curTurn));
 
         } catch (IOException e) {
             System.out.println("Error reading file");
+            return null;
         }
-        return players;
     }
 
     private Area stringToArea(String s) {

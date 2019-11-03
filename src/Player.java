@@ -38,7 +38,6 @@ public class Player {
     Player(int playerNum, Board board, ArrayList<Piece> pieces) {
         this.playerNum = playerNum;
         this.board = board;
-        pieces = new ArrayList<>();
         this.pieces = pieces;
     }
 

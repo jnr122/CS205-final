@@ -16,8 +16,9 @@ public class Game {
     private int winner;
     private boolean gameOver;
     private String filePath;
-    Loader loader;
-    Random rand;
+    private int startingTurn;
+    private Loader loader;
+    private Random rand;
 
     /**
      * Constructor
@@ -34,14 +35,27 @@ public class Game {
             players.add(new Player(i, board));
         }
         loader = new Loader();
+        startingTurn = 0;
+    }
+
+    public Game(ArrayList<Player> players, Board board, int startingTurn) {
+        gameOver = false;
+        int winner = -1;
+        rand = new Random();
+        this.players = players;
+        movablePieces = new ArrayList<>();
+        this.board = board;
+        die = new Die(Constants.NUMDIESIDES);
+        loader = new Loader();
+        this.startingTurn = startingTurn;
     }
 
     /**
      * Main game loop
      */
     public void run() {
+        int turnCount = this.startingTurn;
         // start turn with player0
-        int turnCount = 0;
         while (!gameOver) {
             turn(turnCount);
             // until the game is over, rotate turns
@@ -50,7 +64,6 @@ public class Game {
                 turnCount %= Constants.NUMPLAYERS;
             }
             loader.save(turnCount, players);
-//            loader.load();
         }
 
         // if the game is over because a winner was selected, win
@@ -116,13 +129,6 @@ public class Game {
     private void win(int playerNum) {
         System.out.println(board);
         System.out.println("Congratulations player " + playerNum);
-    }
-
-    /**
-     * Load saved game
-     */
-    private void load() {
-
     }
 
     /**

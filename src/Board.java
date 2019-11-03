@@ -42,6 +42,7 @@ public class Board {
         for (int i = 1; i <= Constants.BOARDSIZE; i++) {
             board.add(new BoardSquare(null, Area.BOARD, i));
         }
+
     }
 
     /**
