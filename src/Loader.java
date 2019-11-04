@@ -50,7 +50,6 @@ public class Loader {
      */
     public Game load() {
         ArrayList<Player> players = new ArrayList<>();
-        Piece piece;
         ArrayList<Piece> pieces;
         String[] piecesString;
         String[] pieceString;
@@ -73,19 +72,26 @@ public class Loader {
                 players.add(new Player(i, board, pieces));
             }
 
+            // get turn
             curTurn = Integer.parseInt(br.readLine());
 
+            // update board to reflect piece locations
             for (int i = 0; i < players.size(); i++) {
                 for (int j = 0; j < players.get(i).getPieces().size(); j++) {
                     board.update(players.get(i).getPieces().get(j));
                 }
             }
 
+            // return loaded game
             return (new Game(players, board, curTurn));
 
+            // on error, return new game
         } catch (IOException e) {
             System.out.println("Error reading file");
-            return null;
+            return (new Game());
+        } catch (NullPointerException e) {
+            System.out.println("Nothing saved");
+            return (new Game());
         }
     }
 
