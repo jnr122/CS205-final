@@ -1,3 +1,3 @@
 public enum Area {
-    HOME, BOARD, FINISH
+    HOME, BOARD, FINISH;
 }

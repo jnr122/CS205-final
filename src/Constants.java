@@ -24,5 +24,6 @@ class Constants {
     static final int NUMPLAYERPIECES = 4;
     static final int NUMDIESIDES = 6;
     static final int FROMHOMETHRESHOLD = 6;
-    static final boolean RUNSIM = true;
+    static final boolean RUNSIM = false;
+    static final String FILEPATH = "src/saveData/save.txt";
 }
