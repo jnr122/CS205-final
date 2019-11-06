@@ -86,7 +86,7 @@ public class Board {
     }
 
     /**
-     * Before updating position of p, old postion needs to be removed
+     * Before updating position of p, old position needs to be removed
      * @param p
      */
     public void remove(Piece p) {

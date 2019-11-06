@@ -4,8 +4,8 @@ public class main {
      */
     public static void main(String[] args) {
         Loader loader = new Loader();
-//        Game g = loader.load();
-        Game g = new Game();
+        Game g = loader.load();
+//        Game g = new Game();
         g.run();
 
     }
