@@ -25,7 +25,6 @@ public class Game {
      */
     public Game() {
         gameOver = false;
-        int winner = -1;
         rand = new Random();
         players = new ArrayList<>();
         movablePieces = new ArrayList<>();
@@ -40,7 +39,6 @@ public class Game {
 
     public Game(ArrayList<Player> players, Board board, int startingTurn) {
         gameOver = false;
-        int winner = -1;
         rand = new Random();
         this.players = players;
         movablePieces = new ArrayList<>();

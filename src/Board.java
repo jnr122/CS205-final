@@ -176,4 +176,17 @@ public class Board {
     public ArrayList<BoardSquare> getBoard() {
         return board;
     }
+
+    /**
+     * Setters
+     */
+    public void setHomes(ArrayList<ArrayList<BoardSquare>> homes) {
+        this.homes = homes;
+    }
+    public void setBoard(ArrayList<BoardSquare> board) {
+        this.board = board;
+    }
+    public void setFinishes(ArrayList<ArrayList<BoardSquare>> finishes) {
+        this.finishes = finishes;
+    }
 }
