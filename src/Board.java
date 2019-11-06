@@ -71,17 +71,19 @@ public class Board {
      * @param p the piece being moved storing its new location
      */
     public void update(Piece p) {
-        if (p.getAr() == Area.HOME) {
-            homes.get(p.getPlayerNum()).get(p.getAbsoluteLoc()-1).setPiece(p);
-        } else if (p.getAr() == Area.BOARD) {
-            // should only get values [1,28]
-            if (board.get(p.getAbsoluteLoc()-1).getPiece() != null) {
-                board.get(p.getAbsoluteLoc()-1).getPiece().toHome();
-                update(board.get(p.getAbsoluteLoc()-1).getPiece());
+        if (p != null) {
+            if (p.getAr() == Area.HOME) {
+                homes.get(p.getPlayerNum()).get(p.getAbsoluteLoc() - 1).setPiece(p);
+            } else if (p.getAr() == Area.BOARD) {
+                // should only get values [1,28]
+                if (board.get(p.getAbsoluteLoc() - 1).getPiece() != null) {
+                    board.get(p.getAbsoluteLoc() - 1).getPiece().toHome();
+                    update(board.get(p.getAbsoluteLoc() - 1).getPiece());
+                }
+                board.get(p.getAbsoluteLoc() - 1).setPiece(p);
+            } else {
+                finishes.get(p.getPlayerNum()).get(p.getAbsoluteLoc() - 1).setPiece(p);
             }
-            board.get(p.getAbsoluteLoc()-1).setPiece(p);
-        } else {
-            finishes.get(p.getPlayerNum()).get(p.getAbsoluteLoc()-1).setPiece(p);
         }
     }
 
@@ -127,9 +129,12 @@ public class Board {
         for (int i = 0; i < Constants.NUMPLAYERS; i++) {
             sHomes += "homes " + i + ": | ";
             for (int j = 0; j < homes.get(i).size(); j++) {
-                if (homes.get(i).get(j).getPiece() != null) {
-                    sHomes += "p" + homes.get(i).get(j).getPiece().getPlayerNum() + "-" +
-                            homes.get(i).get(j).getPiece().getPieceNum()+  " | ";
+                Piece piece = homes.get(i).get(j).getPiece();
+                if (piece != null) {
+                    if (piece.getType()!= Type.NULL) {
+                        sHomes += "p" + piece.getPlayerNum() + "-" +
+                                piece.getPieceNum() + " | ";
+                    }
                 } else {
                     sHomes += "-- | ";
                 }

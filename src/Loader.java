@@ -65,13 +65,15 @@ public class Loader {
                 st = br.readLine();
                 pieces = new ArrayList<>();
                 piecesString = st.split(",");
+                Type type = stringToType(piecesString[piecesString.length - 1]);
+
                 for (int j = 0; j < Constants.NUMPLAYERPIECES; j++) {
                     pieceString = piecesString[j].split("-");
-                    pieces.add(new Piece(i, j, stringToArea(pieceString[0]), Integer.parseInt(pieceString[1])));
+                    pieces.add(new Piece(i, j, stringToArea(pieceString[0]), Integer.parseInt(pieceString[1]), type));
                 }
 
+                players.add(new Player(i, board, pieces, type));
 
-                players.add(new Player(i, board, pieces, stringToType(piecesString[piecesString.length-1])));
             }
 
             // get turn

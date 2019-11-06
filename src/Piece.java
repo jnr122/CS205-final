@@ -16,29 +16,32 @@ public class Piece {
     private int playerOffset;
     private int pieceNum;
     private int relativeLoc;
+    private Type type;
 
     /**
      * Constructor
      * @param playerNum, the player's turn value
      */
-    Piece(int playerNum, int pieceNum) {
+    Piece(int playerNum, int pieceNum, Type type) {
         ar = Area.HOME;
         this.playerNum = playerNum;
         this.pieceNum = pieceNum + 1;
-        playerOffset = playerNum * Constants.OFFSET;
+        this.playerOffset = playerNum * Constants.OFFSET;
         this.toHome();
+        this.type = type;
     }
 
     /**
      * Overloaded constructor to accept saved areaLoc
      * @param playerNum, the player's turn value, and saved area and absoluteLoc
      */
-    Piece(int playerNum, int pieceNum, Area ar, int relativeLoc) {
+    Piece(int playerNum, int pieceNum, Area ar, int relativeLoc, Type type) {
         this.playerNum = playerNum;
         this.pieceNum = pieceNum + 1;
-        playerOffset = playerNum * Constants.OFFSET;
+        this.playerOffset = playerNum * Constants.OFFSET;
         this.ar = ar;
         this.relativeLoc = relativeLoc;
+        this.type = type;
 
     }
 
@@ -136,6 +139,9 @@ public class Piece {
     }
     public int getRelativeLoc() {
         return relativeLoc;
+    }
+    public Type getType() {
+        return type;
     }
 
     /**

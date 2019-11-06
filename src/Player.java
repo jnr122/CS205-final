@@ -20,14 +20,15 @@ public class Player {
      * Constructor
      * @param playerNum the player's turn value, board
      */
-    Player(int playerNum, Board board, Type type ) {
+    Player(int playerNum, Board board, Type type) {
+
         this.playerNum = playerNum;
         this.board = board;
         this.type = type;
         pieces = new ArrayList<>();
-
+        Piece p;
         for (int i = 0; i < Constants.NUMPLAYERPIECES; i++) {
-            Piece p = new Piece(playerNum, i);
+            p = new Piece(playerNum, i, type);
             pieces.add(p);
             board.update(p);
         }

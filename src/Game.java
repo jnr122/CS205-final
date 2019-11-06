@@ -76,47 +76,52 @@ public class Game {
      * @param playerNum
      */
     private void turn(int playerNum) {
-        int roll;
-        int toMove;
-        int result;
+        // only play turn if not NULL player
+        if (!(players.get(playerNum).getType() == Type.NULL)) {
 
-        Scanner sc = new Scanner(System.in);
-        System.out.println(board);
+            int roll;
+            int toMove;
+            int result;
 
-        roll = die.roll();
-        movablePieces = players.get(playerNum).getMovablePieces(roll);
+            Scanner sc = new Scanner(System.in);
+            System.out.println(board);
 
-        // players can move no pieces
-        if (movablePieces.size() == 0) {
-            System.out.print("Roll = " + roll + ". Player " + playerNum + " can't move anything. (c) to continue: ");
-            if (!Constants.RUNSIM && players.get(playerNum).getType() == Type.PLAYER) {
-                sc.next();
-            }
-        } else {
-            String s = "";
-            for (int i = 0; i < movablePieces.size(); i++) {
-                s += "(" + movablePieces.get(i) + ") ";
-            }
-            System.out.println("Roll = " + roll + ". Player " + playerNum + ", Which piece would you like to move " + s);
+            roll = die.roll();
+            movablePieces = players.get(playerNum).getMovablePieces(roll);
 
-            if (!Constants.RUNSIM && players.get(playerNum).getType() == Type.PLAYER) {
-                toMove = sc.nextInt();
+            // players can move no pieces
+            if (movablePieces.size() == 0) {
+                System.out.print("Roll = " + roll + ". Player " + playerNum + " can't move anything. (c) to continue: ");
+                if (!Constants.RUNSIM && players.get(playerNum).getType() == Type.PLAYER) {
+                    sc.next();
+                }
+                System.out.println();
             } else {
-                toMove = movablePieces.get(rand.nextInt(movablePieces.size()));
-            }
-            result = players.get(playerNum).move(toMove, roll);
+                String s = "";
+                for (int i = 0; i < movablePieces.size(); i++) {
+                    s += "(" + movablePieces.get(i) + ") ";
+                }
+                System.out.println("Roll = " + roll + ". Player " + playerNum + ", Which piece would you like to move " + s);
 
-            // player tried something invalid, should get to try again
-            while (result == -1) {
-                System.out.println("Invalid pick, try again: " + s);
-                toMove = sc.nextInt();
+                if (!Constants.RUNSIM && players.get(playerNum).getType() == Type.PLAYER) {
+                    toMove = sc.nextInt();
+                } else {
+                    toMove = movablePieces.get(rand.nextInt(movablePieces.size()));
+                }
                 result = players.get(playerNum).move(toMove, roll);
-            }
-        }
 
-        if (players.get(playerNum).allPiecesInArea(Area.FINISH)) {
-            gameOver = true;
-            winner = playerNum;
+                // player tried something invalid, should get to try again
+                while (result == -1) {
+                    System.out.println("Invalid pick, try again: " + s);
+                    toMove = sc.nextInt();
+                    result = players.get(playerNum).move(toMove, roll);
+                }
+            }
+
+            if (players.get(playerNum).allPiecesInArea(Area.FINISH)) {
+                gameOver = true;
+                winner = playerNum;
+            }
         }
     }
 
