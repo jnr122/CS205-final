@@ -45,8 +45,8 @@ public class Loader {
     }
 
     /**
-     * Load arraylists of board
-     * @return all arraylists of the board
+     * Load game attributes
+     * @return loaded game, or new game on failure to load
      */
     public Game load() {
         ArrayList<Player> players = new ArrayList<>();

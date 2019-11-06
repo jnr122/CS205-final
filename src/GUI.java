@@ -1,8 +1,7 @@
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.text.*;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
@@ -21,6 +20,8 @@ public class GUI extends Application{
     private BorderPane gamePane = new BorderPane();
     private Scene homeScene = new Scene(homePane, 800, 800);
     private Scene gameScene = new Scene(gamePane, 900, 900);
+    private Loader loader = new Loader();
+    private Game game;
 
 
     @Override
@@ -63,11 +64,13 @@ public class GUI extends Application{
         Button startButton = new Button("START");
         startButton.setOnAction(e -> {
             //TODO load a NEW board
+            game = new Game();
             window.setScene(gameScene);
         });
         Button resumeButton = new Button("RESUME");
         resumeButton.setOnAction( e -> {
             //TODO load a stored game
+            game = loader.load();
             window.setScene(gameScene);
         });
         Button exitButtom = new Button("EXIT");
