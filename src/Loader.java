@@ -31,7 +31,7 @@ public class Loader {
                     s.append(players.get(i).getPieces().get(j).getAr()).append("-").
                             append(players.get(i).getPieces().get(j).getRelativeLoc()).append(",");
                 }
-                s.append("\n");
+                s.append(players.get(i).getType()).append("\n");
             }
             fr.write(s.toString());
             fr.write(Integer.toString(turn));
@@ -65,11 +65,13 @@ public class Loader {
                 st = br.readLine();
                 pieces = new ArrayList<>();
                 piecesString = st.split(",");
-                for (int j = 0; j < piecesString.length; j++) {
+                for (int j = 0; j < Constants.NUMPLAYERPIECES; j++) {
                     pieceString = piecesString[j].split("-");
                     pieces.add(new Piece(i, j, stringToArea(pieceString[0]), Integer.parseInt(pieceString[1])));
                 }
-                players.add(new Player(i, board, pieces, Type.NULL));
+
+
+                players.add(new Player(i, board, pieces, stringToType(piecesString[piecesString.length-1])));
             }
 
             // get turn
@@ -102,6 +104,15 @@ public class Loader {
             return Area.BOARD;
         else
             return Area.FINISH;
+    }
+
+    private Type stringToType(String s) {
+        if (s.equals("PLAYER"))
+            return Type.PLAYER;
+        else if (s.equals("CPU"))
+            return Type.CPU;
+        else
+            return Type.NULL;
     }
 
 }
