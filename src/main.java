@@ -1,11 +1,20 @@
+import java.util.ArrayList;
+
 public class main {
     /**
      * Test game structure
      */
     public static void main(String[] args) {
-        Loader loader = new Loader();
-        Game g = loader.load();
-//        Game g = new Game();
+//        Loader loader = new Loader();
+//        Game g = loader.load();
+
+        ArrayList<Type> types = new ArrayList<>();
+        types.add(Type.CPU);
+        types.add(Type.CPU);
+        types.add(Type.CPU);
+        types.add(Type.PLAYER);
+
+        Game g = new Game(types);
         g.run();
 
     }

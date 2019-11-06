@@ -12,10 +12,10 @@ public class Game {
     private Board board;
     private ArrayList<Player> players;
     private ArrayList<Integer> movablePieces;
+    private ArrayList<Integer> CPUs;
     private Die die;
     private int winner;
     private boolean gameOver;
-    private String filePath;
     private int startingTurn;
     private Loader loader;
     private Random rand;
@@ -23,7 +23,7 @@ public class Game {
     /**
      * Constructor
      */
-    public Game() {
+    public Game(ArrayList<Type> types) {
         gameOver = false;
         rand = new Random();
         players = new ArrayList<>();
@@ -31,7 +31,7 @@ public class Game {
         board = new Board();
         die = new Die(Constants.NUMDIESIDES);
         for (int i = 0; i < Constants.NUMPLAYERS; i++) {
-            players.add(new Player(i, board));
+            players.add(new Player(i, board, types.get(i)));
         }
         loader = new Loader();
         startingTurn = 0;
@@ -89,7 +89,7 @@ public class Game {
         // players can move no pieces
         if (movablePieces.size() == 0) {
             System.out.print("Roll = " + roll + ". Player " + playerNum + " can't move anything. (c) to continue: ");
-            if (!Constants.RUNSIM) {
+            if (!Constants.RUNSIM && players.get(playerNum).getType() == Type.PLAYER) {
                 sc.next();
             }
         } else {
@@ -99,7 +99,7 @@ public class Game {
             }
             System.out.println("Roll = " + roll + ". Player " + playerNum + ", Which piece would you like to move " + s);
 
-            if (!Constants.RUNSIM) {
+            if (!Constants.RUNSIM && players.get(playerNum).getType() == Type.PLAYER) {
                 toMove = sc.nextInt();
             } else {
                 toMove = movablePieces.get(rand.nextInt(movablePieces.size()));

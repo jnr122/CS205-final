@@ -64,13 +64,11 @@ public class GUI extends Application{
         Button startButton = new Button("START");
         startButton.setOnAction(e -> {
             //TODO load a NEW board
-            game = new Game();
             window.setScene(gameScene);
         });
         Button resumeButton = new Button("RESUME");
         resumeButton.setOnAction( e -> {
             //TODO load a stored game
-            game = loader.load();
             window.setScene(gameScene);
         });
         Button exitButtom = new Button("EXIT");

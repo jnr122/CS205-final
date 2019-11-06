@@ -69,7 +69,7 @@ public class Loader {
                     pieceString = piecesString[j].split("-");
                     pieces.add(new Piece(i, j, stringToArea(pieceString[0]), Integer.parseInt(pieceString[1])));
                 }
-                players.add(new Player(i, board, pieces));
+                players.add(new Player(i, board, pieces, Type.NULL));
             }
 
             // get turn
@@ -88,10 +88,10 @@ public class Loader {
             // on error, return new game
         } catch (IOException e) {
             System.out.println("Error reading file");
-            return (new Game());
+            return null;
         } catch (NullPointerException e) {
             System.out.println("Nothing saved");
-            return (new Game());
+            return null;
         }
     }
 

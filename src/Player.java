@@ -14,14 +14,16 @@ public class Player {
     private ArrayList<Piece> pieces;
     private int playerNum;
     private Board board;
+    private Type type;
 
     /**
      * Constructor
      * @param playerNum the player's turn value, board
      */
-    Player(int playerNum, Board board) {
+    Player(int playerNum, Board board, Type type ) {
         this.playerNum = playerNum;
         this.board = board;
+        this.type = type;
         pieces = new ArrayList<>();
 
         for (int i = 0; i < Constants.NUMPLAYERPIECES; i++) {
@@ -35,10 +37,11 @@ public class Player {
      * Overloaded constructor for loading player
      * @param playerNum the player's turn value, board, and and constructed pieces
      */
-    Player(int playerNum, Board board, ArrayList<Piece> pieces) {
+    Player(int playerNum, Board board, ArrayList<Piece> pieces, Type type) {
         this.playerNum = playerNum;
         this.board = board;
         this.pieces = pieces;
+        this.type = type;
     }
 
     /**
@@ -58,7 +61,7 @@ public class Player {
         // if making a lap, user gets choice to move into finish or continue around
         if (validMoves.size() == 2) {
             Scanner sc = new Scanner(System.in);
-            if (!Constants.RUNSIM) {
+            if (!Constants.RUNSIM && this.type == Type.PLAYER) {
                 System.out.print("Move to finish (0) or continue around board (1): ");
                 choice = sc.nextInt();
             } else {
@@ -162,6 +165,9 @@ public class Player {
     }
     public ArrayList<Piece> getPieces() {
         return pieces;
+    }
+    public Type getType() {
+        return type;
     }
 
 }
