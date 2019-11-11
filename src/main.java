@@ -8,14 +8,13 @@ public class main {
         Loader loader = new Loader();
 
         ArrayList<Type> types = new ArrayList<>();
-        types.add(Type.NULL);
         types.add(Type.CPU);
-        types.add(Type.NULL);
+        types.add(Type.PLAYER);
+        types.add(Type.CPU);
         types.add(Type.PLAYER);
 
         Game g = new Game(types);
-//        g = loader.load();
-
+        g = loader.load();
         g.run();
 
     }

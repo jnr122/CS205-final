@@ -3,8 +3,6 @@ import java.util.Random;
 import java.util.Scanner;
 /**
  * Representation of the game
- *
- * To simulate, comment lines
  */
 public class Game {
 
@@ -12,7 +10,6 @@ public class Game {
     private Board board;
     private ArrayList<Player> players;
     private ArrayList<Integer> movablePieces;
-    private ArrayList<Integer> CPUs;
     private Die die;
     private int winner;
     private boolean gameOver;

@@ -42,7 +42,6 @@ public class Piece {
         this.ar = ar;
         this.relativeLoc = relativeLoc;
         this.type = type;
-
     }
 
     /**

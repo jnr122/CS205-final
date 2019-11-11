@@ -99,6 +99,11 @@ public class Loader {
         }
     }
 
+    /**
+     * Convert string area to enum area
+     * @param s string
+     * @return enum area
+     */
     private Area stringToArea(String s) {
         if (s.equals("HOME"))
             return Area.HOME;
@@ -108,6 +113,11 @@ public class Loader {
             return Area.FINISH;
     }
 
+    /**
+     * Convert string type to enum type
+     * @param s string
+     * @return enum type
+     */
     private Type stringToType(String s) {
         if (s.equals("PLAYER"))
             return Type.PLAYER;
