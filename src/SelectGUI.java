@@ -69,6 +69,7 @@ public class SelectGUI {
 
         HBox labels = new HBox(5);
 
+        page.setAlignment(Pos.CENTER);
         page.getChildren().addAll(boxes, labels);
 
 
