@@ -18,10 +18,7 @@
     -fx-font-size: 16pt;
     -fx-font-family: Bavro;
     -fx-base: #34495e;
-    -fx-background-color:
-        #090a0c,
-        linear-gradient(#3498db, #9b59b6),
-        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));;
+    -fx-background: #34495e;
 }
 
 .labelTitle{
@@ -33,27 +30,25 @@
 
 
 .button{
-    -fx-background-color:
-            #090a0c,
-            linear-gradient(#95a5a6, #7f8c8d);
-    -fx-background-radius: 5,4,3,5;
-    -fx-background-insets: 0,1,2,0;
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
-    -fx-font-family: "Lovelo";
-    -fx-font-weight: bold;
-    -fx-text-fill: black;
-    -fx-font-size: 24px;
-    -fx-padding: 15 30 15 30;
+    -fx-padding: 9 9 9 9;
+    -fx-border-color: transparent;
+    -fx-border-radius: 1;
+    -fx-border-insets: 2 2 2 2;
+    -fx-border-width: 0;
+    -fx-background-radius: 1;
+    -fx-background-color: transparent;
+    -fx-font-family: Bavro;
+    -fx-font-size: 25px;
+    -fx-text-fill: #1abc9c;
 }
 
 .button:focused {
-    -fx-background-color:
-            #090a0c,
-            linear-gradient(#34495e, #2c3e50);
-    -fx-background-radius: 5,4,3,5;
-    -fx-background-insets: 0,1,2,0;
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
-    -fx-text-fill: white;
+    -fx-border-color: transparent;
+    -fx-border-width: 1;
+    -fx-border-style: solid;
+    -fx-border-raduis: 0;
+    -fx-border-insets: 1 1 1 1;
+
 }
 
 .button:pressed {

@@ -18,8 +18,10 @@ public class GUI extends Application{
     private Stage window;
     private BorderPane homePane = new BorderPane();
     private BorderPane gamePane = new BorderPane();
+    private BorderPane selectPane = new BorderPane();
     private Scene homeScene = new Scene(homePane, 800, 800);
     private Scene gameScene = new Scene(gamePane, 900, 900);
+    private Scene selectScene = new Scene(selectPane, 800, 800);
     private Loader loader = new Loader();
     private Game game;
 
@@ -39,12 +41,15 @@ public class GUI extends Application{
         homePane.setCenter(homeButtons());
         homePane.setTop(title());
 
+        SelectGUI select = new SelectGUI();
         BoardGUI board = new BoardGUI();
 
         gamePane.setCenter(board.getBoard());
+        selectPane.setCenter(select.getPage());
 
         homeScene.getStylesheets().add("resources/stylesheet.css");
         gameScene.getStylesheets().add("resources/stylesheet.css");
+        selectPane.getStylesheets().add("resources/stylesheet.css");
 
         stage.setTitle("Trouble");
         stage.setScene(homeScene);
@@ -63,8 +68,9 @@ public class GUI extends Application{
 
         Button startButton = new Button("START");
         startButton.setOnAction(e -> {
+            window.setScene(selectScene);
             //TODO load a NEW board
-            window.setScene(gameScene);
+            //window.setScene(gameScene);
         });
         Button resumeButton = new Button("RESUME");
         resumeButton.setOnAction( e -> {
