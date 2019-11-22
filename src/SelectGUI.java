@@ -37,7 +37,13 @@ public class SelectGUI {
             {
                 @Override
                 public void handle(MouseEvent t) {
-                    selection.setText("Player");
+                    if (t.getClickCount()%3 == 1){
+                        selection.setText("Player");
+                    } else if (t.getClickCount()%3 == 2) {
+                        selection.setText("CPU");
+                    } else if (t.getClickCount()%3 == 0) {
+                        selection.setText("NONE");
+                    }
                 }
             });
             switch(i) {
