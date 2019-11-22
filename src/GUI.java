@@ -39,6 +39,7 @@ public class GUI extends Application{
     private void initUI(Stage stage) {
 
         homePane.setCenter(homeButtons());
+        homePane.setAlignment(title(), Pos.CENTER);
         homePane.setTop(title());
 
         SelectGUI select = new SelectGUI();
@@ -87,6 +88,7 @@ public class GUI extends Application{
 
         return buttonBox;
     }
+
 
     /**
      * The title for the game
