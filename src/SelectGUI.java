@@ -2,13 +2,10 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.layout.HBox;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
-
-import java.util.ArrayList;
 
 public class SelectGUI {
 
@@ -37,11 +34,12 @@ public class SelectGUI {
             {
                 @Override
                 public void handle(MouseEvent t) {
-                    if (t.getClickCount()%3 == 1){
-                        selection.setText("Player");
-                    } else if (t.getClickCount()%3 == 2) {
+                    String text = selection.getText();
+                    if (text == "NONE") {
+                        selection.setText("PLAYER");
+                    } else if (text == "PLAYER") {
                         selection.setText("CPU");
-                    } else if (t.getClickCount()%3 == 0) {
+                    } else if (text == "CPU") {
                         selection.setText("NONE");
                     }
                 }
