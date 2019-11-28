@@ -19,9 +19,9 @@ public class GUI extends Application{
     private BorderPane homePane = new BorderPane();
     private BorderPane gamePane = new BorderPane();
     private BorderPane selectPane = new BorderPane();
-    private Scene homeScene = new Scene(homePane, 800, 800);
-    private Scene gameScene = new Scene(gamePane, 900, 900);
-    private Scene selectScene = new Scene(selectPane, 800, 800);
+    private Scene homeScene = new Scene(homePane, 800, 700);
+    private Scene gameScene = new Scene(gamePane, 1000, 1000);
+    private Scene selectScene = new Scene(selectPane, 800, 600);
     private Loader loader = new Loader();
     private Game game;
 
@@ -39,14 +39,17 @@ public class GUI extends Application{
     private void initUI(Stage stage) {
 
         homePane.setCenter(homeButtons());
-        homePane.setAlignment(title(), Pos.CENTER);
+        homePane.setAlignment(title(), Pos.BASELINE_CENTER);
         homePane.setTop(title());
+
 
         SelectGUI select = new SelectGUI();
         BoardGUI board = new BoardGUI();
 
         gamePane.setCenter(board.getBoard());
+        gamePane.setTop(gameButtons());
         selectPane.setCenter(select.getPage());
+        selectPane.setBottom(selectButtons());
 
         homeScene.getStylesheets().add("resources/stylesheet.css");
         gameScene.getStylesheets().add("resources/stylesheet.css");
@@ -70,20 +73,18 @@ public class GUI extends Application{
         Button startButton = new Button("START");
         startButton.setOnAction(e -> {
             window.setScene(selectScene);
-            //TODO load a NEW board
-            //window.setScene(gameScene);
         });
         Button resumeButton = new Button("RESUME");
         resumeButton.setOnAction( e -> {
             //TODO load a stored game
             window.setScene(gameScene);
         });
-        Button exitButtom = new Button("EXIT");
-        exitButtom.setOnAction( e -> {
+        Button exitButton = new Button("EXIT");
+        exitButton.setOnAction( e -> {
             System.exit(1);
         });
 
-        buttonBox.getChildren().addAll(startButton, resumeButton, exitButtom);
+        buttonBox.getChildren().addAll(startButton, resumeButton, exitButton);
 
 
         return buttonBox;
@@ -96,11 +97,56 @@ public class GUI extends Application{
 
      */
     private Label title() {
-        Label title = new Label("TROUBLE");
+        Label title = new Label(" TROUBLE");
         title.getStyleClass().add("labelTitle");
         title.setAlignment(Pos.CENTER);
 
         return title;
+    }
+
+    /**
+     * collection of buttons on the selection screen
+     * @return an HBox of two buttons centered
+     */
+    private HBox selectButtons(){
+
+        HBox buttonBox = new HBox(1);
+        buttonBox.setPadding(new Insets(20,20,20,20));
+        buttonBox.setAlignment(Pos.CENTER);
+
+        Button backButton = new Button("BACK");
+        backButton.setOnAction(e -> {
+            window.setScene(homeScene);
+        });
+        Button startButton = new Button("START");
+        startButton.setOnAction( e -> {
+            //TODO load a stored game
+            window.setScene(gameScene);
+        });
+
+        buttonBox.getChildren().addAll(backButton, startButton);
+
+        return buttonBox;
+    }
+
+    /**
+     * collection of buttons on the game screen
+     * @return an HBox of buttons
+     */
+    private HBox gameButtons(){
+
+        HBox buttonBox = new HBox(1);
+        buttonBox.setPadding(new Insets(20,20,20,20));
+        buttonBox.setAlignment(Pos.CENTER_RIGHT);
+
+        Button exitButton = new Button("EXIT");
+        exitButton.setOnAction(e -> {
+            window.setScene(homeScene);
+        });
+
+        buttonBox.getChildren().addAll(exitButton);
+
+        return buttonBox;
     }
 
     public static void main(String[] args) {

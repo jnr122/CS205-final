@@ -15,10 +15,15 @@
 
 
 .root{
-    -fx-font-size: 16pt;
+    -fx-font-size: 18pt;
     -fx-font-family: Bavro;
     -fx-base: #34495e;
     -fx-background: #34495e;
+}
+
+.die{
+    -fx-font-size: 40pt;
+    -fx-font-family: Sprague;
 }
 
 .labelTitle{
@@ -61,6 +66,26 @@
     -fx-background-color: #fff;
     -fx-fill: #fff;
     -fx-cell-hover-color: #fff;
+}
+
+.redSquare {
+    -fx-background-color: #e74c3c;
+    -fx-fill: #e74c3c;
+}
+
+.yellowSquare{
+    -fx-background-color: #f39c12;
+    -fx-fill: #f39c12;
+}
+
+.greenSquare{
+    -fx-background-color: #2ecc71;
+    -fx-fill: #2ecc71;
+}
+
+.blueSquare{
+    -fx-background-color: #3498db;
+    -fx-fill: #3498db;
 }
 
 .redSelectSquare {
