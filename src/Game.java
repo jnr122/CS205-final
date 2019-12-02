@@ -49,7 +49,7 @@ public class Game {
     }
 
     /**
-     * Main game loop
+     * Main game loop - TESTING ONLY: real running should happen from GAMEGUI
      */
     public void run() {
         int turnCount = this.startingTurn;
@@ -75,7 +75,7 @@ public class Game {
      * Simulate a single turn for player playerNum
      * @param playerNum
      */
-    private void turn(int playerNum) {
+    public void turn(int playerNum) {
         // only play turn if not NULL player
         if (!(players.get(playerNum).getType() == Type.NULL)) {
 
@@ -129,7 +129,7 @@ public class Game {
      * playerNum wins
      * @param playerNum
      */
-    private void win(int playerNum) {
+    public void win(int playerNum) {
         System.out.println(board);
         System.out.println("Congratulations player " + playerNum);
     }
@@ -140,6 +140,22 @@ public class Game {
      */
     public String toString() {
         return board.toString();
+    }
+
+    /**
+     * Getters
+     */
+    public int getStartingTurn() {
+        return this.startingTurn;
+    }
+    public int getWinner() {
+        return this.winner;
+    }
+    public boolean isGameOver() {
+        return this.gameOver;
+    }
+    public ArrayList<Player> getPlayers() {
+        return this.players;
     }
 
 }

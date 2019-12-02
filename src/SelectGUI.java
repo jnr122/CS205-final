@@ -7,14 +7,18 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 
+import java.util.ArrayList;
+
 public class SelectGUI {
 
     private VBox selectionPage;
+    private ArrayList<Type> types;
 
 
     public SelectGUI(){
 
         selectionPage = new VBox();
+        types = new ArrayList<>();
         setUp(selectionPage);
 
     }
@@ -23,8 +27,9 @@ public class SelectGUI {
         HBox boxes = new HBox(10);
         boxes.setAlignment(Pos.CENTER);
         for (int i = 0; i < 4; i++) {
+            types.add(Type.NULL);
             StackPane stacked = new StackPane();
-            Label selection = new Label("NONE");
+            Label selection = new Label(Integer.toString(i) + "-NONE");
             Rectangle r = new Rectangle();
             r.setWidth(150);
             r.setHeight(150);
@@ -34,13 +39,17 @@ public class SelectGUI {
             {
                 @Override
                 public void handle(MouseEvent t) {
-                    String text = selection.getText();
-                    if (text == "NONE") {
-                        selection.setText("PLAYER");
-                    } else if (text == "PLAYER") {
-                        selection.setText("CPU");
-                    } else if (text == "CPU") {
-                        selection.setText("NONE");
+                    String[] text = selection.getText().split("-");
+                    int ind =  Integer.parseInt(text[0]);
+                    if (text[1].equals("NONE")) {
+                        selection.setText(text[0] + "-PLAYER");
+                        types.set(ind, Type.PLAYER);
+                    } else if (text[1].equals("PLAYER")) {
+                        selection.setText(text[0] + "-CPU");
+                        types.set(ind, Type.CPU);
+                    } else if (text[1].equals("CPU")) {
+                        selection.setText(text[0] + "-NONE");
+                        types.set(ind, Type.NULL);
                     }
                 }
             });
@@ -76,5 +85,8 @@ public class SelectGUI {
 
     public VBox getPage(){
         return selectionPage;
+    }
+    public ArrayList<Type> getTypes() {
+        return types;
     }
 }

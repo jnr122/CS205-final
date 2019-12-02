@@ -23,6 +23,7 @@ public class GUI extends Application{
     private Scene gameScene = new Scene(gamePane, 1000, 1000);
     private Scene selectScene = new Scene(selectPane, 800, 600);
     private Loader loader = new Loader();
+    SelectGUI select;
     private Game game;
 
 
@@ -43,7 +44,7 @@ public class GUI extends Application{
         homePane.setTop(title());
 
 
-        SelectGUI select = new SelectGUI();
+        select = new SelectGUI();
         BoardGUI board = new BoardGUI();
 
         gamePane.setCenter(board.getBoard());
@@ -76,8 +77,9 @@ public class GUI extends Application{
         });
         Button resumeButton = new Button("RESUME");
         resumeButton.setOnAction( e -> {
-            //TODO load a stored game
             window.setScene(gameScene);
+            game = loader.load();
+//            run();
         });
         Button exitButton = new Button("EXIT");
         exitButton.setOnAction( e -> {
@@ -88,6 +90,34 @@ public class GUI extends Application{
 
 
         return buttonBox;
+    }
+
+    /**
+     * Main game loop
+     */
+    public void run() {
+        window.setScene(gameScene);
+        int turnCount = game.getStartingTurn();
+        // start turn with player0
+        while (!game.isGameOver()) {
+            //TODO some sort of updateBoardGUI function that goes through the game's board's arraylists
+            //     and updates the piece positions every time the game loops
+            game.turn(turnCount);
+            // until the game is over, rotate turns
+            if (!game.isGameOver()) {
+                turnCount += 1;
+                turnCount %= Constants.NUMPLAYERS;
+            }
+            loader.save(turnCount, game.getPlayers());
+        }
+
+        // if the game is over because a winner was selected, win
+        if (game.getWinner() != -1) {
+            game.win(game.getWinner());
+        }
+        // else game was stopped for another reason
+
+
     }
 
 
@@ -120,8 +150,9 @@ public class GUI extends Application{
         });
         Button startButton = new Button("START");
         startButton.setOnAction( e -> {
-            //TODO load a stored game
             window.setScene(gameScene);
+            game = new Game(select.getTypes());
+//            run();
         });
 
         buttonBox.getChildren().addAll(backButton, startButton);
