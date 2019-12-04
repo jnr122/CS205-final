@@ -6,6 +6,7 @@ import javafx.scene.shape.Circle;
 public class PieceGUI extends Circle {
 
     public PieceGUI(){
+
         this.setCenterX(10.0f);
         this.setCenterY(10.0f);
         this.setRadius(25.0f);
