@@ -1,21 +1,22 @@
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-public class PieceGUI extends Circle implements SelectPiece {
-    public PieceGUI(double centerX, double centerY, double radius) {
-        super(centerX, centerY, radius);
-    }
+public class PieceGUI extends Circle {
 
-    @Override
-    public boolean requestSelection(boolean select) {
-        return true;
-    }
+    public PieceGUI(){
+        this.setCenterX(10.0f);
+        this.setCenterY(10.0f);
+        this.setRadius(25.0f);
+        this.setFill(Color.GRAY);
 
-    @Override
-    public void notifySelection(boolean select) {
-        if(select)
-            this.setFill(Color.GRAY);
-        else
-            this.setFill(Color.BLACK);
+        this.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent t) {
+                System.out.println("hi");
+            }
+        });
+
     }
 }
