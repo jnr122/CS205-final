@@ -31,7 +31,6 @@ public class GUI extends Application{
     SelectGUI select;
     private Game game = null;
     private BoardGUI board;
-    Thread thread;
     private int displayTurn = 0;
     private int winner = -1;
 
@@ -39,7 +38,6 @@ public class GUI extends Application{
     public void start(Stage stage) {
         window = stage;
         initUI(window);
-//        thread();
 
     }
 
@@ -129,6 +127,7 @@ public class GUI extends Application{
 
             int turnCount = game.getStartingTurn();
             while (!game.isGameOver()) {
+                Globals.showDie = false;
 
                 game.turn(turnCount);
                 // until the game is over, rotate turns
@@ -166,8 +165,15 @@ public class GUI extends Application{
                     @Override
                     public void run() {
                         if (game != null) {
+                            // check to see if turn has changed
                             board.setSquares(game.getBoard(), game.getDie());
                             gamePane.setTop(viewMove(displayTurn));
+
+                            if (!Globals.showDie)
+                                Globals.dieLabel.setText("?");
+                            else
+                                Globals.dieLabel.setText(Integer.toString(game.getDie().getCurrSide()));
+
                         }
                     }
                 };

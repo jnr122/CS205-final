@@ -1,3 +1,5 @@
+import javafx.scene.control.Label;
+
 class AreaLoc {
     public Area ar;
     int loc;
@@ -31,4 +33,8 @@ class Constants {
 class Globals {
     static int clickedPieceNum = -1;
     static int clickedPiecePlayerNum = -1;
+
+    static boolean showDie = false;
+    static Label dieLabel = new Label("?");
+
 }

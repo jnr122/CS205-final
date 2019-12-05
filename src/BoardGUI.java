@@ -35,14 +35,15 @@ public class BoardGUI {
 
     public void setDie() {
         // The DIE
-        Label dieLabel = new Label("?");
-        board.add(dieLabel, 6,6);
-        dieLabel.setAlignment(Pos.CENTER);
-        dieLabel.getStyleClass().add("die");
-        dieLabel.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        Globals.dieLabel = new Label("?");
+        board.add(Globals.dieLabel, 6,6);
+        Globals.dieLabel.setAlignment(Pos.CENTER);
+        Globals.dieLabel.getStyleClass().add("die");
+        Globals.dieLabel.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent t) {
-                dieLabel.setText(Integer.toString(die.getCurrSide()));
+                Globals.showDie = true;
+                Globals.dieLabel.setText(Integer.toString(die.getCurrSide()));
             }
         });
         // die animation
@@ -240,7 +241,7 @@ public class BoardGUI {
             boardSqaure.setRadius(30.0f);
             board.add(boardSqaure, 3, 3+i);
 
-            Piece piece1 = backendBoard.getHomes().get(currPlayerNum).get(i).getPiece();
+            Piece piece1 = backendBoard.getFinishes().get(currPlayerNum).get(i).getPiece();
             if (piece1 != null) {
                 PieceGUI piece = new PieceGUI(piece1.getPlayerNum(), piece1.getPieceNum());
                 board.add(piece, 3, 3+i);

@@ -134,13 +134,10 @@ public class Game {
                     }
 
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(100);
                     } catch (InterruptedException ex) {
                     }
 
-                    System.out.println(count);
-                    System.out.println("PlayerNum: " + Integer.toString(Globals.clickedPiecePlayerNum) +
-                            "  PieceNum: " + Integer.toString(Globals.clickedPieceNum));
                 }
             }
 
