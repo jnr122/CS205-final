@@ -1,7 +1,5 @@
 import javafx.event.EventHandler;
-import javafx.geometry.HPos;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -159,7 +157,7 @@ public class BoardGUI {
             Piece piece1 = backendBoard.getBoard().get(convertCoordinates(2, 3 + i)).getPiece();
             if (piece1 != null) {
                 PieceGUI piece = new PieceGUI(piece1.getPlayerNum());
-                board.add(piece, 2+i, 3+i);
+                board.add(piece, 2, 3+i);
             }
         }
 

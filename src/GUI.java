@@ -129,7 +129,6 @@ public class GUI extends Application{
 
             // if the game is over because a winner was selected, win
             if (game.getWinner() != -1) {
-                board.setSquares(game.getBoard());
                 game.win(game.getWinner());
             }
             // else game was stopped for another reason
