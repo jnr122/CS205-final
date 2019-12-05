@@ -270,6 +270,10 @@ public class BoardGUI {
             x = i - j + 29;
         }
         
+        if (x == 28) {
+            x = x - 28;
+        }
+        
         return x;
     }
 
