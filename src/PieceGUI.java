@@ -38,10 +38,6 @@ public class PieceGUI extends Circle {
             public void handle(MouseEvent t) {
                 Globals.clickedPiecePlayerNum = PieceGUI.this.playerNum;
                 Globals.clickedPieceNum = PieceGUI.this.pieceNum;
-
-                System.out.println(Globals.clickedPieceNum);
-                System.out.println(Globals.clickedPiecePlayerNum);
-
             }
         });
 

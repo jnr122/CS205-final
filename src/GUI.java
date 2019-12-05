@@ -33,6 +33,7 @@ public class GUI extends Application{
     private BoardGUI board;
     private int displayTurn = 0;
     private int winner = -1;
+    private int turnCount = 0;
 
     @Override
     public void start(Stage stage) {
@@ -53,7 +54,7 @@ public class GUI extends Application{
 
 
         select = new SelectGUI();
-        board = new BoardGUI(new Board(), new Die(Constants.NUMDIESIDES));
+        board = new BoardGUI(new Board(), new Die(Constants.NUMDIESIDES), turnCount);
 
         gamePane.setCenter(board.getBoard());
         gamePane.setBottom(gameButtons());
@@ -88,7 +89,7 @@ public class GUI extends Application{
         Button resumeButton = new Button("RESUME");
         resumeButton.setOnAction( e -> {
             game = loader.load();
-            board.setSquares(game.getBoard(), game.getDie());
+            board.setSquares(game.getBoard(), game.getDie(), turnCount);
             window.setScene(gameScene);
             run();
 
@@ -125,7 +126,7 @@ public class GUI extends Application{
 
         Thread t = new Thread(() -> {
 
-            int turnCount = game.getStartingTurn();
+            turnCount = game.getStartingTurn();
             while (!game.isGameOver()) {
                 Globals.showDie = false;
 
@@ -166,7 +167,7 @@ public class GUI extends Application{
                     public void run() {
                         if (game != null) {
                             // check to see if turn has changed
-                            board.setSquares(game.getBoard(), game.getDie());
+                            board.setSquares(game.getBoard(), game.getDie(), turnCount);
                             gamePane.setTop(viewMove(displayTurn));
 
                             if (!Globals.showDie)
@@ -254,7 +255,7 @@ public class GUI extends Application{
         Button startButton = new Button("START");
         startButton.setOnAction( e -> {
             game = new Game(select.getTypes());
-            board.setSquares(game.getBoard(), game.getDie());
+            board.setSquares(game.getBoard(), game.getDie(), turnCount);
             window.setScene(gameScene);
             run();
 

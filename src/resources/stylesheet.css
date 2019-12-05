@@ -83,6 +83,10 @@
     -fx-fill: #f39c12;
 }
 
+.currentTurn{
+    -fx-stroke: #17202A;
+}
+
 .greenSquare{
     -fx-background-color: #2ecc71;
     -fx-fill: #2ecc71;

@@ -12,14 +12,14 @@ public class BoardGUI {
     private GridPane board;
     private Die die;
 
-    public BoardGUI(Board backendBoard, Die die){
+    public BoardGUI(Board backendBoard, Die die, int currTurn){
         board = new GridPane();
         board.setAlignment(Pos.CENTER);
         board.setVgap(10);
         board.setHgap(10);
         this.die = die;
         setDie();
-        setSquares(backendBoard, die);
+        setSquares(backendBoard, die, currTurn);
 
 //        this.addMouseListener(new MouseAdapter() {
 //
@@ -66,7 +66,7 @@ public class BoardGUI {
     }
 
 
-    public void setSquares(Board backendBoard, Die die){
+    public void setSquares(Board backendBoard, Die die, int currTurn){
         this.die = die;
 
         // SCALING FOR EFFECTS
@@ -85,6 +85,11 @@ public class BoardGUI {
             String homeLabel = "HOME";
             Label home = new Label(Character.toString(homeLabel.charAt(i)));
             stacked.getChildren().addAll(boardSqaure, home);
+
+            if (currTurn == currPlayerNum) {
+                boardSqaure.setStrokeWidth(5);
+                boardSqaure.getStyleClass().add("currentTurn");
+            }
 
             boardSqaure.getStyleClass().add("redSquare");
             boardSqaure.setCenterX(10.0f);
@@ -110,6 +115,11 @@ public class BoardGUI {
             Label home = new Label(Character.toString(homeLabel.charAt(i)));
             stacked.getChildren().addAll(boardSqaure, home);
 
+            if (currTurn == currPlayerNum) {
+                boardSqaure.setStrokeWidth(5);
+                boardSqaure.getStyleClass().add("currentTurn");
+            }
+
             boardSqaure.getStyleClass().add("yellowSquare");
             boardSqaure.setCenterX(10.0f);
             boardSqaure.setCenterY(10.0f);
@@ -132,6 +142,11 @@ public class BoardGUI {
             Label home = new Label(Character.toString(homeLabel.charAt(i)));
             stacked.getChildren().addAll(boardSqaure, home);
 
+            if (currTurn == currPlayerNum) {
+                boardSqaure.setStrokeWidth(5);
+                boardSqaure.getStyleClass().add("currentTurn");
+            }
+
             boardSqaure.getStyleClass().add("greenSquare");
             boardSqaure.setCenterX(10.0f);
             boardSqaure.setCenterY(10.0f);
@@ -153,6 +168,11 @@ public class BoardGUI {
             String homeLabel = "HOME";
             Label home = new Label(Character.toString(homeLabel.charAt(i)));
             stacked.getChildren().addAll(boardSqaure, home);
+
+            if (currTurn == currPlayerNum) {
+                boardSqaure.setStrokeWidth(5);
+                boardSqaure.getStyleClass().add("currentTurn");
+            }
 
             boardSqaure.getStyleClass().add("blueSquare");
             boardSqaure.setCenterX(10.0f);
