@@ -32,6 +32,7 @@ public class GUI extends Application{
     private Game game = null;
     private BoardGUI board;
     Thread thread;
+    private int displayTurn = 0;
 
     @Override
     public void start(Stage stage) {
@@ -56,7 +57,8 @@ public class GUI extends Application{
         board = new BoardGUI(new Board(), new Die(Constants.NUMDIESIDES));
 
         gamePane.setCenter(board.getBoard());
-        gamePane.setTop(gameButtons());
+        gamePane.setBottom(gameButtons());
+
         selectPane.setCenter(select.getPage());
         selectPane.setBottom(selectButtons());
 
@@ -132,6 +134,7 @@ public class GUI extends Application{
                 if (!game.isGameOver()) {
                     turnCount += 1;
                     turnCount %= Constants.NUMPLAYERS;
+                    displayTurn = turnCount;
                 }
                 loader.save(turnCount, game.getPlayers());
             }
@@ -162,6 +165,7 @@ public class GUI extends Application{
                     public void run() {
                         if (game != null) {
                             board.setSquares(game.getBoard(), game.getDie());
+                            gamePane.setTop(viewMove(displayTurn));
                         }
                     }
                 };
@@ -196,6 +200,31 @@ public class GUI extends Application{
         title.setAlignment(Pos.CENTER);
 
         return title;
+    }
+
+    private Label viewMove(int player) {
+        Label move = new Label("");
+        switch (player) {
+            case 0:
+                move.setText("Turn: Player 1");
+                break;
+            case 1:
+                move.setText("Turn: Player 2");
+                break;
+            case 2:
+                move.setText("Turn: Player 3");
+                break;
+            case 3:
+                move.setText("Turn: Player 4");
+                break;
+            default:
+                break;
+
+        }
+        move.getStyleClass().add("viewMove");
+        move.setAlignment(Pos.CENTER_LEFT);
+
+        return move;
     }
 
     /**

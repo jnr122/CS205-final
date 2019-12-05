@@ -26,6 +26,11 @@
     -fx-font-family: Sprague;
 }
 
+.viewMove{
+    -fx-font-size: 40pt;
+    -fx-font-family: Sprague;
+}
+
 .labelTitle{
     -fx-alignment: center;
     -fx-font-size: 100pt;
