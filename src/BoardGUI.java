@@ -116,7 +116,7 @@ public class BoardGUI {
             board.add(stacked, i, 9+i);
 
             Piece piece1 = backendBoard.getHomes().get(currPlayerNum).get(i).getPiece();
-            if (backendBoard.getHomes().get(currPlayerNum).get(i).getPiece() != null) {
+            if (piece1 != null) {
                 PieceGUI piece = new PieceGUI(piece1.getPlayerNum(), piece1.getPieceNum());
                 board.add(piece, i, 9 + i);
             }
@@ -138,7 +138,7 @@ public class BoardGUI {
             board.add(stacked, 9+i, 12-i);
 
             Piece piece1 = backendBoard.getHomes().get(currPlayerNum).get(i).getPiece();
-            if (backendBoard.getHomes().get(currPlayerNum).get(i).getPiece() != null) {
+            if (piece1 != null) {
                 PieceGUI piece = new PieceGUI(piece1.getPlayerNum(), piece1.getPieceNum());
                 board.add(piece, 9+i, 12 - i);
             }
@@ -160,7 +160,7 @@ public class BoardGUI {
             board.add(stacked, 9+i, i);
 
             Piece piece1 = backendBoard.getHomes().get(currPlayerNum).get(i).getPiece();
-            if (backendBoard.getHomes().get(currPlayerNum).get(i).getPiece() != null) {
+            if (piece1 != null) {
                 PieceGUI piece = new PieceGUI(piece1.getPlayerNum(), piece1.getPieceNum());
                 board.add(piece, 9+i, i);
             }
@@ -241,7 +241,7 @@ public class BoardGUI {
             board.add(boardSqaure, 3, 3+i);
 
             Piece piece1 = backendBoard.getHomes().get(currPlayerNum).get(i).getPiece();
-            if (backendBoard.getFinishes().get(currPlayerNum).get(i).getPiece() != null) {
+            if (piece1 != null) {
                 PieceGUI piece = new PieceGUI(piece1.getPlayerNum(), piece1.getPieceNum());
                 board.add(piece, 3, 3+i);
             }
@@ -259,7 +259,7 @@ public class BoardGUI {
             board.add(boardSqaure, 3+i, 9);
 
             Piece piece1 = backendBoard.getHomes().get(currPlayerNum).get(i).getPiece();
-            if (backendBoard.getFinishes().get(currPlayerNum).get(i).getPiece() != null) {
+            if (piece1 != null) {
                 PieceGUI piece = new PieceGUI(piece1.getPlayerNum(), piece1.getPieceNum());
                 board.add(piece, 3+i, 9);
             }
@@ -276,7 +276,7 @@ public class BoardGUI {
             board.add(boardSqaure, 9, 9-i);
 
             Piece piece1 = backendBoard.getHomes().get(currPlayerNum).get(i).getPiece();
-            if (backendBoard.getFinishes().get(currPlayerNum).get(i).getPiece() != null) {
+            if (piece1 != null) {
                 PieceGUI piece = new PieceGUI(piece1.getPlayerNum(), piece1.getPieceNum());
                 board.add(piece, 9, 9-i);
             }
@@ -293,7 +293,7 @@ public class BoardGUI {
             board.add(boardSqaure,9-i , 3);
 
             Piece piece1 = backendBoard.getHomes().get(currPlayerNum).get(i).getPiece();
-            if (backendBoard.getFinishes().get(currPlayerNum).get(i).getPiece() != null) {
+            if (piece1 != null) {
                 PieceGUI piece = new PieceGUI(piece1.getPlayerNum(), piece1.getPieceNum());
                 board.add(piece, 9-i, 3);
             }

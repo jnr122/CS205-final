@@ -223,7 +223,7 @@ public class GUI extends Application{
                 break;
         }
         if (winner != -1) {
-            move.setText("Player " + winner+1 + "WON!");
+            move.setText("Player " + winner + " WON!");
         }
         move.getStyleClass().add("viewMove");
         move.setAlignment(Pos.CENTER_LEFT);
