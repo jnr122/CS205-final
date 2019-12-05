@@ -118,25 +118,25 @@
 }
 
 .redPiece {
-    -fx-background-color: #c0392b;
-    -fx-fill: #c0392b;
+    -fx-background-color: #922B21;
+    -fx-fill: #922B21;
 }
 
 .yellowPiece{
-    -fx-background-color: #e67e22;
-    -fx-fill: #e67e22;
+    -fx-background-color: #B9770E;
+    -fx-fill: #B9770E;
 
 }
 
 .greenPiece{
-    -fx-background-color: #27ae60;
-        -fx-fill: #27ae60;
+    -fx-background-color: #1E8449;
+        -fx-fill: #1E8449;
 
 }
 
 .bluePiece{
-    -fx-background-color: #2980b9;
-    -fx-fill: #2980b9;
+    -fx-background-color: #2471A3;
+    -fx-fill: #2471A3;
 }
 
 .redSelectSquare {
