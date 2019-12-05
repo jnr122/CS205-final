@@ -219,16 +219,16 @@ public class GUI extends Application{
         Label move = new Label("");
         switch (player) {
             case 0:
-                move.setText("Turn: Player 1");
+                move.setText("Turn: Player 0");
                 break;
             case 1:
-                move.setText("Turn: Player 2");
+                move.setText("Turn: Player 1");
                 break;
             case 2:
-                move.setText("Turn: Player 3");
+                move.setText("Turn: Player 2");
                 break;
             case 3:
-                move.setText("Turn: Player 4");
+                move.setText("Turn: Player 3");
                 break;
             default:
                 break;
