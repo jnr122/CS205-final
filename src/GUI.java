@@ -25,6 +25,8 @@ public class GUI extends Application{
     private Loader loader = new Loader();
     SelectGUI select;
     private Game game;
+    private BoardGUI board;
+
 
 
     @Override
@@ -45,7 +47,7 @@ public class GUI extends Application{
 
 
         select = new SelectGUI();
-        BoardGUI board = new BoardGUI();
+        board = new BoardGUI(new Board());
 
         gamePane.setCenter(board.getBoard());
         gamePane.setTop(gameButtons());
@@ -60,6 +62,7 @@ public class GUI extends Application{
         stage.setScene(homeScene);
         stage.show();
     }
+
 
     /**
      * collection of buttons on the main screen
@@ -77,9 +80,11 @@ public class GUI extends Application{
         });
         Button resumeButton = new Button("RESUME");
         resumeButton.setOnAction( e -> {
-            window.setScene(gameScene);
             game = loader.load();
+            board.setSquares(game.getBoard());
+            window.setScene(gameScene);
 //            run();
+
         });
         Button exitButton = new Button("EXIT");
         exitButton.setOnAction( e -> {
@@ -97,6 +102,7 @@ public class GUI extends Application{
      */
     public void run() {
         window.setScene(gameScene);
+        board.setSquares(game.getBoard());
         int turnCount = game.getStartingTurn();
         // start turn with player0
         while (!game.isGameOver()) {
@@ -150,9 +156,12 @@ public class GUI extends Application{
         });
         Button startButton = new Button("START");
         startButton.setOnAction( e -> {
-            window.setScene(gameScene);
             game = new Game(select.getTypes());
-//            run();
+            board.setSquares(game.getBoard());
+            window.setScene(gameScene);
+            //            run();
+
+
         });
 
         buttonBox.getChildren().addAll(backButton, startButton);

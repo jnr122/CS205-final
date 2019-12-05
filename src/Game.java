@@ -151,6 +151,9 @@ public class Game {
     public int getWinner() {
         return this.winner;
     }
+    public Board getBoard() {
+        return board;
+    }
     public boolean isGameOver() {
         return this.gameOver;
     }

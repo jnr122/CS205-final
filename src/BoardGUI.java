@@ -1,34 +1,28 @@
-import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.StackPane;
-import javafx.scene.text.*;
-import javafx.scene.shape.*;
-import javafx.geometry.Insets;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Circle;
 import javafx.scene.transform.Scale;
-import javafx.stage.Stage;
 
 public class BoardGUI {
 
     private GridPane board;
 
 
-    public BoardGUI(){
+    public BoardGUI(Board backendBoard){
         board = new GridPane();
         board.setAlignment(Pos.CENTER);
         board.setVgap(10);
         board.setHgap(10);
-        setSquares(board);
+        setSquares(backendBoard);
+
     }
 
-    private void setSquares(GridPane board){
+
+    public void setSquares(Board backendBoard){
         // SCALING FOR EFFECTS
         Scale scaleUP = new Scale(1.08, 1.08);
         scaleUP.setPivotX(75);
@@ -65,8 +59,9 @@ public class BoardGUI {
 
 
 
-        //home 1 RED
+        //home 0 RED
         for (int i=0; i<=3; i++) {
+            int currPlayerNum = 0;
             Circle boardSqaure = new Circle();
             StackPane stacked = new StackPane();
             String homeLabel = "HOME";
@@ -79,12 +74,16 @@ public class BoardGUI {
             boardSqaure.setRadius(30.0f);
             board.add(stacked, i, 3-i);
 
-            PieceGUI piece = new PieceGUI(0);
-            board.add(piece, i, 3-i);
+            if (backendBoard.getHomes().get(currPlayerNum).get(i).getPiece() != null) {
+                PieceGUI piece = new PieceGUI(currPlayerNum);
+                board.add(piece, i, 3 - i);
+            }
         }
 
-        //home 2 YELLOW
+        //home 1 YELLOW
         for (int i=0; i<=3; i++) {
+            int currPlayerNum = 1;
+
             Circle boardSqaure = new Circle();
             StackPane stacked = new StackPane();
             String homeLabel = "HOME";
@@ -96,10 +95,16 @@ public class BoardGUI {
             boardSqaure.setCenterY(10.0f);
             boardSqaure.setRadius(30.0f);
             board.add(stacked, i, 9+i);
+
+            if (backendBoard.getHomes().get(currPlayerNum).get(i).getPiece() != null) {
+                PieceGUI piece = new PieceGUI(currPlayerNum);
+                board.add(piece, i, 9 + i);
+            }
         }
 
-        //home 3 GREEN
+        //home 2 GREEN
         for (int i=0; i<=3; i++) {
+            int currPlayerNum = 2;
             Circle boardSqaure = new Circle();
             StackPane stacked = new StackPane();
             String homeLabel = "HOME";
@@ -111,10 +116,16 @@ public class BoardGUI {
             boardSqaure.setCenterY(10.0f);
             boardSqaure.setRadius(30.0f);
             board.add(stacked, 9+i, 12-i);
+
+            if (backendBoard.getHomes().get(currPlayerNum).get(i).getPiece() != null) {
+                PieceGUI piece = new PieceGUI(currPlayerNum);
+                board.add(piece, 9+i, 12 - i);
+            }
         }
 
-        //home 4 BLUE
+        //home 3 BLUE
         for (int i=0; i<=3; i++) {
+            int currPlayerNum = 3;
             Circle boardSqaure = new Circle();
             StackPane stacked = new StackPane();
             String homeLabel = "HOME";
@@ -126,6 +137,11 @@ public class BoardGUI {
             boardSqaure.setCenterY(10.0f);
             boardSqaure.setRadius(30.0f);
             board.add(stacked, 9+i, i);
+
+            if (backendBoard.getHomes().get(currPlayerNum).get(i).getPiece() != null) {
+                PieceGUI piece = new PieceGUI(currPlayerNum);
+                board.add(piece, 9+i, i);
+            }
         }
 
         // top row of spaces
@@ -168,44 +184,69 @@ public class BoardGUI {
             board.add(boardSqaure, 3+i, 10);
         }
 
-        //Finish 1 RED
+        //Finish 0 RED
         for (int i=0; i<=3; i++) {
+            int currPlayerNum = 0;
             Circle boardSqaure = new Circle();
             boardSqaure.getStyleClass().add("redSquare");
             boardSqaure.setCenterX(10.0f);
             boardSqaure.setCenterY(10.0f);
             boardSqaure.setRadius(30.0f);
             board.add(boardSqaure, 3, 3+i);
+
+            if (backendBoard.getFinishes().get(currPlayerNum).get(i).getPiece() != null) {
+                PieceGUI piece = new PieceGUI(currPlayerNum);
+                board.add(piece, 3, 3+i);
+            }
         }
 
-        //finish 2 YELLOW
+        //finish 1 YELLOW
         for (int i=0; i<=3; i++) {
+            int currPlayerNum = 1;
+
             Circle boardSqaure = new Circle();
             boardSqaure.getStyleClass().add("yellowSquare");
             boardSqaure.setCenterX(10.0f);
             boardSqaure.setCenterY(10.0f);
             boardSqaure.setRadius(30.0f);
             board.add(boardSqaure, 3+i, 9);
+
+            if (backendBoard.getFinishes().get(currPlayerNum).get(i).getPiece() != null) {
+                PieceGUI piece = new PieceGUI(currPlayerNum);
+                board.add(piece, 3+i, 9);
+            }
         }
 
-        //finish 3 GREEN
+        //finish 2 GREEN
         for (int i=0; i<=3; i++) {
+            int currPlayerNum = 2;
             Circle boardSqaure = new Circle();
             boardSqaure.getStyleClass().add("greenSquare");
             boardSqaure.setCenterX(10.0f);
             boardSqaure.setCenterY(10.0f);
             boardSqaure.setRadius(30.0f);
             board.add(boardSqaure, 9, 9-i);
+
+            if (backendBoard.getFinishes().get(currPlayerNum).get(i).getPiece() != null) {
+                PieceGUI piece = new PieceGUI(currPlayerNum);
+                board.add(piece, 9, 9-i);
+            }
         }
 
-        //finish 4 BLUE
+        //finish 3 BLUE
         for (int i=0; i<=3; i++) {
+            int currPlayerNum = 3;
             Circle boardSqaure = new Circle();
             boardSqaure.getStyleClass().add("blueSquare");
             boardSqaure.setCenterX(10.0f);
             boardSqaure.setCenterY(10.0f);
             boardSqaure.setRadius(30.0f);
             board.add(boardSqaure,9-i , 3);
+
+            if (backendBoard.getFinishes().get(currPlayerNum).get(i).getPiece() != null) {
+                PieceGUI piece = new PieceGUI(currPlayerNum);
+                board.add(piece, 9-i, 3);
+            }
         }
 
     }
