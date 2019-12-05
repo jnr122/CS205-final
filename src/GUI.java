@@ -83,7 +83,7 @@ public class GUI extends Application{
             game = loader.load();
             board.setSquares(game.getBoard());
             window.setScene(gameScene);
-//            run();
+            run();
 
         });
         Button exitButton = new Button("EXIT");
@@ -102,12 +102,12 @@ public class GUI extends Application{
      */
     public void run() {
         window.setScene(gameScene);
-        board.setSquares(game.getBoard());
         int turnCount = game.getStartingTurn();
         // start turn with player0
         while (!game.isGameOver()) {
             //TODO some sort of updateBoardGUI function that goes through the game's board's arraylists
             //     and updates the piece positions every time the game loops
+            board.setSquares(game.getBoard());
             game.turn(turnCount);
             // until the game is over, rotate turns
             if (!game.isGameOver()) {
@@ -119,6 +119,7 @@ public class GUI extends Application{
 
         // if the game is over because a winner was selected, win
         if (game.getWinner() != -1) {
+            board.setSquares(game.getBoard());
             game.win(game.getWinner());
         }
         // else game was stopped for another reason
@@ -159,7 +160,7 @@ public class GUI extends Application{
             game = new Game(select.getTypes());
             board.setSquares(game.getBoard());
             window.setScene(gameScene);
-            //            run();
+            run();
 
 
         });
