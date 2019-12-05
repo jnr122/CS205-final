@@ -98,10 +98,10 @@ public class Game {
 //                }
 //                System.out.println();
             } else {
-                String s = "";
-                for (int i = 0; i < movablePieces.size(); i++) {
-                    s += "(" + movablePieces.get(i) + ") ";
-                }
+//                String s = "";
+//                for (int i = 0; i < movablePieces.size(); i++) {
+//                    s += "(" + movablePieces.get(i) + ") ";
+//                }
 //                System.out.println("Roll = " + roll + ". Player " + playerNum + ", Which piece would you like to move " + s);
 
                 if (!Constants.RUNSIM && players.get(playerNum).getType() == Type.PLAYER) {
