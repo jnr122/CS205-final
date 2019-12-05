@@ -33,6 +33,7 @@ public class GUI extends Application{
     private BoardGUI board;
     Thread thread;
     private int displayTurn = 0;
+    private int winner = -1;
 
     @Override
     public void start(Stage stage) {
@@ -142,7 +143,8 @@ public class GUI extends Application{
 
             // if the game is over because a winner was selected, win
             if (game.getWinner() != -1) {
-                game.win(game.getWinner());
+                winner = game.getWinner();
+                game.win(winner);
             }
             // else game was stopped for another reason
 
@@ -219,7 +221,9 @@ public class GUI extends Application{
                 break;
             default:
                 break;
-
+        }
+        if (winner != -1) {
+            move.setText("Player " + winner+1 + "WON!");
         }
         move.getStyleClass().add("viewMove");
         move.setAlignment(Pos.CENTER_LEFT);
