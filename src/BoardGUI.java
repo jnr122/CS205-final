@@ -104,7 +104,11 @@ public class BoardGUI {
             Piece piece1 = backendBoard.getHomes().get(currPlayerNum).get(i).getPiece();
             if (piece1 != null) {
                 PieceGUI piece = new PieceGUI(piece1.getPlayerNum(), piece1.getPieceNum());
-                board.add(piece, i, 3 - i);
+
+
+                stacked = new StackPane();
+                stacked.getChildren().addAll(piece, home);
+                board.add(stacked, i, 3 - i);
             }
 
         }
@@ -136,7 +140,9 @@ public class BoardGUI {
             Piece piece1 = backendBoard.getHomes().get(currPlayerNum).get(i).getPiece();
             if (piece1 != null) {
                 PieceGUI piece = new PieceGUI(piece1.getPlayerNum(), piece1.getPieceNum());
-                board.add(piece, i, 9 + i);
+                stacked = new StackPane();
+                stacked.getChildren().addAll(piece, home);
+                board.add(stacked, i, 9 + i);
             }
         }
 
@@ -166,7 +172,9 @@ public class BoardGUI {
             Piece piece1 = backendBoard.getHomes().get(currPlayerNum).get(i).getPiece();
             if (piece1 != null) {
                 PieceGUI piece = new PieceGUI(piece1.getPlayerNum(), piece1.getPieceNum());
-                board.add(piece, 9+i, 12 - i);
+                stacked = new StackPane();
+                stacked.getChildren().addAll(piece, home);
+                board.add(stacked, 9+i, 12 - i);
             }
         }
 
@@ -196,7 +204,9 @@ public class BoardGUI {
             Piece piece1 = backendBoard.getHomes().get(currPlayerNum).get(i).getPiece();
             if (piece1 != null) {
                 PieceGUI piece = new PieceGUI(piece1.getPlayerNum(), piece1.getPieceNum());
-                board.add(piece, 9+i, i);
+                stacked = new StackPane();
+                stacked.getChildren().addAll(piece, home);
+                board.add(stacked, 9+i, i);
             }
         }
 
@@ -212,6 +222,10 @@ public class BoardGUI {
             Piece piece1 = backendBoard.getBoard().get(convertCoordinates(2, 3 + i)).getPiece();
             if (piece1 != null) {
                 PieceGUI piece = new PieceGUI(piece1.getPlayerNum(), piece1.getPieceNum());
+                piece.setCenterX(10.0f);
+                piece.setCenterY(10.0f);
+                piece.setRadius(30.0f);
+
                 board.add(piece, 2, 3+i);
             }
         }
@@ -228,6 +242,11 @@ public class BoardGUI {
             Piece piece1 = backendBoard.getBoard().get(convertCoordinates(10, 3+i)).getPiece();
             if (piece1 != null) {
                 PieceGUI piece = new PieceGUI(piece1.getPlayerNum(), piece1.getPieceNum());
+
+                piece.setCenterX(10.0f);
+                piece.setCenterY(10.0f);
+                piece.setRadius(30.0f);
+
                 board.add(piece, 10, 3+i);
             }
         }
@@ -244,6 +263,11 @@ public class BoardGUI {
             Piece piece1 = backendBoard.getBoard().get(convertCoordinates(3+i, 2)).getPiece();
             if (piece1 != null) {
                 PieceGUI piece = new PieceGUI(piece1.getPlayerNum(), piece1.getPieceNum());
+
+                piece.setCenterX(10.0f);
+                piece.setCenterY(10.0f);
+                piece.setRadius(30.0f);
+
                 board.add(piece, 3+i, 2);
             }
         }
@@ -260,6 +284,11 @@ public class BoardGUI {
             Piece piece1 = backendBoard.getBoard().get(convertCoordinates(3+i, 10)).getPiece();
             if (piece1 != null) {
                 PieceGUI piece = new PieceGUI(piece1.getPlayerNum(), piece1.getPieceNum());
+
+                piece.setCenterX(10.0f);
+                piece.setCenterY(10.0f);
+                piece.setRadius(30.0f);
+
                 board.add(piece, 3+i, 10);
             }
         }
@@ -277,6 +306,11 @@ public class BoardGUI {
             Piece piece1 = backendBoard.getFinishes().get(currPlayerNum).get(i).getPiece();
             if (piece1 != null) {
                 PieceGUI piece = new PieceGUI(piece1.getPlayerNum(), piece1.getPieceNum());
+
+                piece.setCenterX(10.0f);
+                piece.setCenterY(10.0f);
+                piece.setRadius(30.0f);
+
                 board.add(piece, 3, 3+i);
             }
         }
@@ -295,6 +329,11 @@ public class BoardGUI {
             Piece piece1 = backendBoard.getFinishes().get(currPlayerNum).get(i).getPiece();
             if (piece1 != null) {
                 PieceGUI piece = new PieceGUI(piece1.getPlayerNum(), piece1.getPieceNum());
+
+                piece.setCenterX(10.0f);
+                piece.setCenterY(10.0f);
+                piece.setRadius(30.0f);
+
                 board.add(piece, 3+i, 9);
             }
         }
@@ -312,6 +351,11 @@ public class BoardGUI {
             Piece piece1 = backendBoard.getFinishes().get(currPlayerNum).get(i).getPiece();
             if (piece1 != null) {
                 PieceGUI piece = new PieceGUI(piece1.getPlayerNum(), piece1.getPieceNum());
+
+                piece.setCenterX(10.0f);
+                piece.setCenterY(10.0f);
+                piece.setRadius(30.0f);
+
                 board.add(piece, 9, 9-i);
             }
         }
@@ -329,6 +373,11 @@ public class BoardGUI {
             Piece piece1 = backendBoard.getFinishes().get(currPlayerNum).get(i).getPiece();
             if (piece1 != null) {
                 PieceGUI piece = new PieceGUI(piece1.getPlayerNum(), piece1.getPieceNum());
+
+                piece.setCenterX(10.0f);
+                piece.setCenterY(10.0f);
+                piece.setRadius(30.0f);
+
                 board.add(piece, 9-i, 3);
             }
         }

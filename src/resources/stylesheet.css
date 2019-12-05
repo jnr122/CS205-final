@@ -130,7 +130,8 @@
 
 .greenPiece{
     -fx-background-color: #27ae60;
-    -fx-fill: #27ae60;
+        -fx-fill: #27ae60;
+
 }
 
 .bluePiece{
