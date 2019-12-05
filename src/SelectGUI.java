@@ -6,6 +6,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.transform.Scale;
 
 import java.util.ArrayList;
 
@@ -24,6 +25,14 @@ public class SelectGUI {
     }
 
     private void setUp(VBox page){
+        // SCALING FOR EFFECTS
+        Scale scaleUP = new Scale(1.02, 1.02);
+        scaleUP.setPivotX(75);
+        scaleUP.setPivotY(75);
+        Scale scaleDown = new Scale(1, 1);
+        scaleDown.setPivotX(0);
+        scaleDown.setPivotY(0);
+
         HBox boxes = new HBox(10);
         boxes.setAlignment(Pos.CENTER);
         for (int i = 0; i < 4; i++) {
@@ -51,6 +60,20 @@ public class SelectGUI {
                         selection.setText(text[0] + "-NONE");
                         types.set(ind, Type.NULL);
                     }
+                }
+            });
+
+            r.setOnMouseEntered(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent t) {
+                    r.getTransforms().setAll(scaleUP);
+                }
+            });
+
+            r.setOnMouseExited(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent t) {
+                    r.getTransforms().setAll(scaleDown);
                 }
             });
             switch(i) {
