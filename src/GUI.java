@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -105,9 +106,8 @@ public class GUI extends Application{
         int turnCount = game.getStartingTurn();
         // start turn with player0
         while (!game.isGameOver()) {
-            //TODO some sort of updateBoardGUI function that goes through the game's board's arraylists
-            //     and updates the piece positions every time the game loops
             board.setSquares(game.getBoard());
+//            updateDisplay();
             game.turn(turnCount);
             // until the game is over, rotate turns
             if (!game.isGameOver()) {
@@ -125,6 +125,38 @@ public class GUI extends Application{
         // else game was stopped for another reason
 
 
+    }
+
+    private void updateDisplay() {
+        // longrunning operation runs on different thread
+        Thread thread = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                Runnable updater = new Runnable() {
+
+                    @Override
+                    public void run() {
+                        board.setSquares(game.getBoard());
+//                        incrementCount();
+                    }
+                };
+
+                while (true) {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException ex) {
+                    }
+
+                    // UI update is run on the Application thread
+                    Platform.runLater(updater);
+                }
+            }
+
+        });
+        // don't let thread prevent JVM shutdown
+        thread.setDaemon(true);
+        thread.start();
     }
 
 

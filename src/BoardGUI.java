@@ -152,6 +152,12 @@ public class BoardGUI {
             boardSqaure.setCenterY(10.0f);
             boardSqaure.setRadius(30.0f);
             board.add(boardSqaure, 2, 3+i);
+
+            Piece piece1 = backendBoard.getBoard().get(convertCoordinates(2, 3 + i)).getPiece();
+            if (piece1 != null) {
+                PieceGUI piece = new PieceGUI(piece1.getPlayerNum());
+                board.add(piece, 2+i, 3+i);
+            }
         }
 
         // bottom row of spaces
@@ -162,6 +168,12 @@ public class BoardGUI {
             boardSqaure.setCenterY(10.0f);
             boardSqaure.setRadius(30.0f);
             board.add(boardSqaure, 10, 3+i);
+
+            Piece piece1 = backendBoard.getBoard().get(convertCoordinates(10, 3+i)).getPiece();
+            if (piece1 != null) {
+                PieceGUI piece = new PieceGUI(piece1.getPlayerNum());
+                board.add(piece, 10, 3+i);
+            }
         }
 
         // left column of spaces
@@ -172,6 +184,12 @@ public class BoardGUI {
             boardSqaure.setCenterY(10.0f);
             boardSqaure.setRadius(30.0f);
             board.add(boardSqaure, 3+i, 2);
+
+            Piece piece1 = backendBoard.getBoard().get(convertCoordinates(3+i, 2)).getPiece();
+            if (piece1 != null) {
+                PieceGUI piece = new PieceGUI(piece1.getPlayerNum());
+                board.add(piece, 3+i, 2);
+            }
         }
 
         // right column of spaces
@@ -182,6 +200,12 @@ public class BoardGUI {
             boardSqaure.setCenterY(10.0f);
             boardSqaure.setRadius(30.0f);
             board.add(boardSqaure, 3+i, 10);
+
+            Piece piece1 = backendBoard.getBoard().get(convertCoordinates(3+i, 10)).getPiece();
+            if (piece1 != null) {
+                PieceGUI piece = new PieceGUI(piece1.getPlayerNum());
+                board.add(piece, 3+i, 10);
+            }
         }
 
         //Finish 0 RED
@@ -269,11 +293,11 @@ public class BoardGUI {
         if (j > i && i == 2) {
             x = i - j + 29;
         }
-        
+
         if (x == 28) {
-            x = x - 28;
+            x = 0;
         }
-        
+
         return x;
     }
 

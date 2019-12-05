@@ -16,7 +16,7 @@ public class main {
         Game g = new Game(types);
 //        g = loader.load();
 
-        g.run();
+//        g.run();
 
     }
 }
