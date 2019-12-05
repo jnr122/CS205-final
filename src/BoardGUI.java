@@ -282,25 +282,21 @@ public class BoardGUI {
         int x = 0;
 
         if (i > j && i != 10) {
-            x = i - j;
+            x = j - i + 28;
         }
         
         if (i > j && i == 10) {
-            x = i + j - 5;
+            x = i - j + 13;
         }
         
         if (j > i && i != 2) {
-            x = j - i + 14;
+            x = j + i - 6;
         }
         
         if (j > i && i == 2) {
-            x = i - j + 29;
+            x = i + j - 5;
         }
-
-        if (x == 28) {
-            x = 0;
-        }
-
+        
         return x;
     }
 
