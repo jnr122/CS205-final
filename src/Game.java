@@ -92,17 +92,17 @@ public class Game {
             // players can move no pieces
             if (movablePieces.size() == 0) {
                 Thread.sleep(1500);
-                System.out.print("Roll = " + roll + ". Player " + playerNum + " can't move anything. (c) to continue: ");
+//                System.out.print("Roll = " + roll + ". Player " + playerNum + " can't move anything. (c) to continue: ");
 //                if (!Constants.RUNSIM && players.get(playerNum).getType() == Type.PLAYER) {
 //                    sc.next();
 //                }
-                System.out.println();
+//                System.out.println();
             } else {
                 String s = "";
                 for (int i = 0; i < movablePieces.size(); i++) {
                     s += "(" + movablePieces.get(i) + ") ";
                 }
-                System.out.println("Roll = " + roll + ". Player " + playerNum + ", Which piece would you like to move " + s);
+//                System.out.println("Roll = " + roll + ". Player " + playerNum + ", Which piece would you like to move " + s);
 
                 if (!Constants.RUNSIM && players.get(playerNum).getType() == Type.PLAYER) {
                     if (Globals.clickedPiecePlayerNum == playerNum) {
@@ -155,8 +155,8 @@ public class Game {
      * @param playerNum
      */
     public void win(int playerNum) {
-        System.out.println(board);
-        System.out.println("Congratulations player " + playerNum);
+//        System.out.println(board);
+//        System.out.println("Congratulations player " + playerNum);
     }
 
     /**
