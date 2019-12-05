@@ -130,7 +130,11 @@ public class GUI extends Application{
             while (!game.isGameOver()) {
                 Globals.showDie = false;
 
-                game.turn(turnCount);
+                try {
+                    game.turn(turnCount);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 // until the game is over, rotate turns
                 if (!game.isGameOver()) {
                     turnCount += 1;

@@ -51,7 +51,7 @@ public class Game {
     /**
      * Main game loop - TESTING ONLY: real running should happen from GAMEGUI
      */
-    public void run() {
+    public void run() throws InterruptedException {
         int turnCount = this.startingTurn;
         // start turn with player0
         while (!gameOver) {
@@ -75,7 +75,7 @@ public class Game {
      * Simulate a single turn for player playerNum
      * @param playerNum
      */
-    public void turn(int playerNum) {
+    public void turn(int playerNum) throws InterruptedException {
         // only play turn if not NULL player
         if (!(players.get(playerNum).getType() == Type.NULL)) {
 
@@ -91,6 +91,7 @@ public class Game {
 
             // players can move no pieces
             if (movablePieces.size() == 0) {
+                Thread.sleep(1500);
                 System.out.print("Roll = " + roll + ". Player " + playerNum + " can't move anything. (c) to continue: ");
 //                if (!Constants.RUNSIM && players.get(playerNum).getType() == Type.PLAYER) {
 //                    sc.next();
@@ -110,6 +111,7 @@ public class Game {
                         toMove = -1;
                     }
                 } else {
+                    Thread.sleep(1500);
                     toMove = movablePieces.get(rand.nextInt(movablePieces.size()));
                 }
 
