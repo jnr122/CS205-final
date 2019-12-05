@@ -28,7 +28,6 @@ public class BoardGUI {
         setSquares(board);
     }
 
-
     private void setSquares(GridPane board){
         // SCALING FOR EFFECTS
         Scale scaleUP = new Scale(1.08, 1.08);
@@ -80,8 +79,8 @@ public class BoardGUI {
             boardSqaure.setRadius(30.0f);
             board.add(stacked, i, 3-i);
 
-            PieceGUI piece = new PieceGUI();
-            board.getChildren().add(piece);
+            PieceGUI piece = new PieceGUI(0);
+            board.add(piece, i, 3-i);
         }
 
         //home 2 YELLOW
