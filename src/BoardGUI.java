@@ -1,5 +1,7 @@
 import javafx.event.EventHandler;
+import javafx.geometry.HPos;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -78,6 +80,7 @@ public class BoardGUI {
                 PieceGUI piece = new PieceGUI(currPlayerNum);
                 board.add(piece, i, 3 - i);
             }
+
         }
 
         //home 1 YELLOW
