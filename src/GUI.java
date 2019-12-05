@@ -25,15 +25,16 @@ public class GUI extends Application{
     private Scene selectScene = new Scene(selectPane, 800, 600);
     private Loader loader = new Loader();
     SelectGUI select;
-    private Game game;
+    private Game game = null;
     private BoardGUI board;
-
-
+    Thread thread;
 
     @Override
     public void start(Stage stage) {
         window = stage;
         initUI(window);
+//        thread();
+
     }
 
     /**
@@ -103,42 +104,56 @@ public class GUI extends Application{
      */
     public void run() {
         window.setScene(gameScene);
-        int turnCount = game.getStartingTurn();
+//        taskThread();
+        thread();
         // start turn with player0
-        while (!game.isGameOver()) {
-            board.setSquares(game.getBoard());
-//            updateDisplay();
-            game.turn(turnCount);
-            // until the game is over, rotate turns
-            if (!game.isGameOver()) {
-                turnCount += 1;
-                turnCount %= Constants.NUMPLAYERS;
+
+
+        Thread t = new Thread(() -> {
+            int turnCount = game.getStartingTurn();
+            while (!game.isGameOver()) {
+
+//            board.setSquares(game.getBoard());
+
+                game.turn(turnCount);
+                // until the game is over, rotate turns
+                if (!game.isGameOver()) {
+                    turnCount += 1;
+                    turnCount %= Constants.NUMPLAYERS;
+                }
+                loader.save(turnCount, game.getPlayers());
             }
-            loader.save(turnCount, game.getPlayers());
-        }
 
-        // if the game is over because a winner was selected, win
-        if (game.getWinner() != -1) {
-            board.setSquares(game.getBoard());
-            game.win(game.getWinner());
-        }
-        // else game was stopped for another reason
 
+
+
+            // if the game is over because a winner was selected, win
+            if (game.getWinner() != -1) {
+                board.setSquares(game.getBoard());
+                game.win(game.getWinner());
+            }
+            // else game was stopped for another reason
+
+        });
+
+        t.start();
 
     }
 
-    private void updateDisplay() {
+
+
+    private void thread() {
         // longrunning operation runs on different thread
         Thread thread = new Thread(new Runnable() {
 
             @Override
             public void run() {
                 Runnable updater = new Runnable() {
-
                     @Override
                     public void run() {
-                        board.setSquares(game.getBoard());
-//                        incrementCount();
+                        if (game != null) {
+                            board.setSquares(game.getBoard());
+                        }
                     }
                 };
 
@@ -150,6 +165,7 @@ public class GUI extends Application{
 
                     // UI update is run on the Application thread
                     Platform.runLater(updater);
+
                 }
             }
 
