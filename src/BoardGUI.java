@@ -250,6 +250,28 @@ public class BoardGUI {
         }
 
     }
+    
+    public int convertCoordinates(int i, int j) {
+        int x = 0;
+
+        if (i > j && i != 10) {
+            x = i - j;
+        }
+        
+        if (i > j && i == 10) {
+            x = i + j - 5;
+        }
+        
+        if (j > i && i != 2) {
+            x = j - i + 14;
+        }
+        
+        if (j > i && i == 2) {
+            x = i - j + 29;
+        }
+        
+        return x;
+    }
 
     public GridPane getBoard(){
         return this.board;
