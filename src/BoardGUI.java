@@ -96,6 +96,9 @@ public class BoardGUI {
             boardSqaure.setCenterY(10.0f);
             boardSqaure.setRadius(30.0f);
             board.add(stacked, i, 9+i);
+
+            PieceGUI piece = new PieceGUI(1);
+            board.add(piece, i, 9+i);
         }
 
         //home 3 GREEN
@@ -111,6 +114,10 @@ public class BoardGUI {
             boardSqaure.setCenterY(10.0f);
             boardSqaure.setRadius(30.0f);
             board.add(stacked, 9+i, 12-i);
+
+            PieceGUI piece = new PieceGUI(2);
+            board.add(piece, 9+i, 12-i);
+
         }
 
         //home 4 BLUE
@@ -126,6 +133,10 @@ public class BoardGUI {
             boardSqaure.setCenterY(10.0f);
             boardSqaure.setRadius(30.0f);
             board.add(stacked, 9+i, i);
+
+            PieceGUI piece = new PieceGUI(3);
+            board.add(piece, 9+i, i);
+
         }
 
         // top row of spaces
