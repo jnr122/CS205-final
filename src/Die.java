@@ -6,6 +6,7 @@ import java.util.Random;
 public class Die {
 
     private int numSides;
+    private int currSide;
 
     /**
      * Constructor
@@ -13,6 +14,7 @@ public class Die {
      */
     public Die(int numSides) {
         this.numSides = numSides;
+        this.currSide = 0;
     }
 
     /**
@@ -21,7 +23,12 @@ public class Die {
      */
     public int roll() {
         Random rand = new Random();
-        return rand.nextInt(numSides) + 1;
+        currSide = rand.nextInt(numSides) + 1;;
+        return currSide;
+    }
+
+    public int getCurrSide() {
+        return currSide;
     }
 
 }

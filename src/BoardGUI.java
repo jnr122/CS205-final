@@ -10,36 +10,39 @@ import javafx.scene.transform.Scale;
 public class BoardGUI {
 
     private GridPane board;
+    private Die die;
 
-
-    public BoardGUI(Board backendBoard){
+    public BoardGUI(Board backendBoard, Die die){
         board = new GridPane();
         board.setAlignment(Pos.CENTER);
         board.setVgap(10);
         board.setHgap(10);
-        setSquares(backendBoard);
+        this.die = die;
+        setDie();
+        setSquares(backendBoard, die);
 
+//        this.addMouseListener(new MouseAdapter() {
+//
+//            @Override
+//            public void mouseClicked(MouseEvent e) {
+//                System.out.println("here");
+//            }
+//        });
     }
 
+    private void addMouseListener(EventHandler<MouseEvent> mouseEventEventHandler) {
+    }
 
-    public void setSquares(Board backendBoard){
-        // SCALING FOR EFFECTS
-        Scale scaleUP = new Scale(1.08, 1.08);
-        scaleUP.setPivotX(75);
-        scaleUP.setPivotY(75);
-        Scale scaleDown = new Scale(1, 1);
-        scaleDown.setPivotX(0);
-        scaleDown.setPivotY(0);
-
+    public void setDie() {
         // The DIE
-        Label die = new Label("?");
-        board.add(die, 6,6);
-        die.setAlignment(Pos.CENTER);
-        die.getStyleClass().add("die");
-        die.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        Label dieLabel = new Label("?");
+        board.add(dieLabel, 6,6);
+        dieLabel.setAlignment(Pos.CENTER);
+        dieLabel.getStyleClass().add("die");
+        dieLabel.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent t) {
-                die.setText("1");
+                dieLabel.setText(Integer.toString(die.getCurrSide()));
             }
         });
         // die animation
@@ -59,6 +62,20 @@ public class BoardGUI {
 
 
 
+    }
+
+
+    public void setSquares(Board backendBoard, Die die){
+        this.die = die;
+
+        // SCALING FOR EFFECTS
+        Scale scaleUP = new Scale(1.08, 1.08);
+        scaleUP.setPivotX(75);
+        scaleUP.setPivotY(75);
+        Scale scaleDown = new Scale(1, 1);
+        scaleDown.setPivotX(0);
+        scaleDown.setPivotY(0);
+
         //home 0 RED
         for (int i=0; i<=3; i++) {
             int currPlayerNum = 0;
@@ -74,8 +91,9 @@ public class BoardGUI {
             boardSqaure.setRadius(30.0f);
             board.add(stacked, i, 3-i);
 
-            if (backendBoard.getHomes().get(currPlayerNum).get(i).getPiece() != null) {
-                PieceGUI piece = new PieceGUI(currPlayerNum);
+            Piece piece1 = backendBoard.getHomes().get(currPlayerNum).get(i).getPiece();
+            if (piece1 != null) {
+                PieceGUI piece = new PieceGUI(piece1.getPlayerNum(), piece1.getPieceNum());
                 board.add(piece, i, 3 - i);
             }
 
@@ -97,8 +115,9 @@ public class BoardGUI {
             boardSqaure.setRadius(30.0f);
             board.add(stacked, i, 9+i);
 
+            Piece piece1 = backendBoard.getHomes().get(currPlayerNum).get(i).getPiece();
             if (backendBoard.getHomes().get(currPlayerNum).get(i).getPiece() != null) {
-                PieceGUI piece = new PieceGUI(currPlayerNum);
+                PieceGUI piece = new PieceGUI(piece1.getPlayerNum(), piece1.getPieceNum());
                 board.add(piece, i, 9 + i);
             }
         }
@@ -118,8 +137,9 @@ public class BoardGUI {
             boardSqaure.setRadius(30.0f);
             board.add(stacked, 9+i, 12-i);
 
+            Piece piece1 = backendBoard.getHomes().get(currPlayerNum).get(i).getPiece();
             if (backendBoard.getHomes().get(currPlayerNum).get(i).getPiece() != null) {
-                PieceGUI piece = new PieceGUI(currPlayerNum);
+                PieceGUI piece = new PieceGUI(piece1.getPlayerNum(), piece1.getPieceNum());
                 board.add(piece, 9+i, 12 - i);
             }
         }
@@ -139,8 +159,9 @@ public class BoardGUI {
             boardSqaure.setRadius(30.0f);
             board.add(stacked, 9+i, i);
 
+            Piece piece1 = backendBoard.getHomes().get(currPlayerNum).get(i).getPiece();
             if (backendBoard.getHomes().get(currPlayerNum).get(i).getPiece() != null) {
-                PieceGUI piece = new PieceGUI(currPlayerNum);
+                PieceGUI piece = new PieceGUI(piece1.getPlayerNum(), piece1.getPieceNum());
                 board.add(piece, 9+i, i);
             }
         }
@@ -156,7 +177,7 @@ public class BoardGUI {
 
             Piece piece1 = backendBoard.getBoard().get(convertCoordinates(2, 3 + i)).getPiece();
             if (piece1 != null) {
-                PieceGUI piece = new PieceGUI(piece1.getPlayerNum());
+                PieceGUI piece = new PieceGUI(piece1.getPlayerNum(), piece1.getPieceNum());
                 board.add(piece, 2, 3+i);
             }
         }
@@ -172,7 +193,7 @@ public class BoardGUI {
 
             Piece piece1 = backendBoard.getBoard().get(convertCoordinates(10, 3+i)).getPiece();
             if (piece1 != null) {
-                PieceGUI piece = new PieceGUI(piece1.getPlayerNum());
+                PieceGUI piece = new PieceGUI(piece1.getPlayerNum(), piece1.getPieceNum());
                 board.add(piece, 10, 3+i);
             }
         }
@@ -188,7 +209,7 @@ public class BoardGUI {
 
             Piece piece1 = backendBoard.getBoard().get(convertCoordinates(3+i, 2)).getPiece();
             if (piece1 != null) {
-                PieceGUI piece = new PieceGUI(piece1.getPlayerNum());
+                PieceGUI piece = new PieceGUI(piece1.getPlayerNum(), piece1.getPieceNum());
                 board.add(piece, 3+i, 2);
             }
         }
@@ -204,7 +225,7 @@ public class BoardGUI {
 
             Piece piece1 = backendBoard.getBoard().get(convertCoordinates(3+i, 10)).getPiece();
             if (piece1 != null) {
-                PieceGUI piece = new PieceGUI(piece1.getPlayerNum());
+                PieceGUI piece = new PieceGUI(piece1.getPlayerNum(), piece1.getPieceNum());
                 board.add(piece, 3+i, 10);
             }
         }
@@ -219,8 +240,9 @@ public class BoardGUI {
             boardSqaure.setRadius(30.0f);
             board.add(boardSqaure, 3, 3+i);
 
+            Piece piece1 = backendBoard.getHomes().get(currPlayerNum).get(i).getPiece();
             if (backendBoard.getFinishes().get(currPlayerNum).get(i).getPiece() != null) {
-                PieceGUI piece = new PieceGUI(currPlayerNum);
+                PieceGUI piece = new PieceGUI(piece1.getPlayerNum(), piece1.getPieceNum());
                 board.add(piece, 3, 3+i);
             }
         }
@@ -236,8 +258,9 @@ public class BoardGUI {
             boardSqaure.setRadius(30.0f);
             board.add(boardSqaure, 3+i, 9);
 
+            Piece piece1 = backendBoard.getHomes().get(currPlayerNum).get(i).getPiece();
             if (backendBoard.getFinishes().get(currPlayerNum).get(i).getPiece() != null) {
-                PieceGUI piece = new PieceGUI(currPlayerNum);
+                PieceGUI piece = new PieceGUI(piece1.getPlayerNum(), piece1.getPieceNum());
                 board.add(piece, 3+i, 9);
             }
         }
@@ -252,8 +275,9 @@ public class BoardGUI {
             boardSqaure.setRadius(30.0f);
             board.add(boardSqaure, 9, 9-i);
 
+            Piece piece1 = backendBoard.getHomes().get(currPlayerNum).get(i).getPiece();
             if (backendBoard.getFinishes().get(currPlayerNum).get(i).getPiece() != null) {
-                PieceGUI piece = new PieceGUI(currPlayerNum);
+                PieceGUI piece = new PieceGUI(piece1.getPlayerNum(), piece1.getPieceNum());
                 board.add(piece, 9, 9-i);
             }
         }
@@ -268,8 +292,9 @@ public class BoardGUI {
             boardSqaure.setRadius(30.0f);
             board.add(boardSqaure,9-i , 3);
 
+            Piece piece1 = backendBoard.getHomes().get(currPlayerNum).get(i).getPiece();
             if (backendBoard.getFinishes().get(currPlayerNum).get(i).getPiece() != null) {
-                PieceGUI piece = new PieceGUI(currPlayerNum);
+                PieceGUI piece = new PieceGUI(piece1.getPlayerNum(), piece1.getPieceNum());
                 board.add(piece, 9-i, 3);
             }
         }
@@ -300,5 +325,9 @@ public class BoardGUI {
 
     public GridPane getBoard(){
         return this.board;
+    }
+
+    public void setOnMouseClicked(EventHandler<MouseEvent> mouseEventEventHandler) {
+        System.out.println("clicked");
     }
 }

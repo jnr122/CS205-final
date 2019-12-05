@@ -83,7 +83,8 @@ public class Piece {
                     validMoves.add(new AreaLoc(Area.BOARD,(((relativeLoc + n) % Constants.BOARDSIZE))));
                 } else {  // entering finish
                     validMoves.add(new AreaLoc(Area.FINISH,(relativeLoc + n) - (Constants.BOARDSIZE)));
-                    validMoves.add(new AreaLoc(Area.BOARD,(relativeLoc + n) % Constants.BOARDSIZE));
+                    // can't choose to continue around the board
+//                    validMoves.add(new AreaLoc(Area.BOARD,(relativeLoc + n) % Constants.BOARDSIZE));
                 }
 
             } else {

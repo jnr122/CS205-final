@@ -27,3 +27,8 @@ class Constants {
     static final boolean RUNSIM = false;
     static final String FILEPATH = "src/saveData/save.txt";
 }
+
+class Globals {
+    static int clickedPieceNum = -1;
+    static int clickedPiecePlayerNum = -1;
+}

@@ -92,9 +92,9 @@ public class Game {
             // players can move no pieces
             if (movablePieces.size() == 0) {
                 System.out.print("Roll = " + roll + ". Player " + playerNum + " can't move anything. (c) to continue: ");
-                if (!Constants.RUNSIM && players.get(playerNum).getType() == Type.PLAYER) {
-                    sc.next();
-                }
+//                if (!Constants.RUNSIM && players.get(playerNum).getType() == Type.PLAYER) {
+//                    sc.next();
+//                }
                 System.out.println();
             } else {
                 String s = "";
@@ -104,17 +104,43 @@ public class Game {
                 System.out.println("Roll = " + roll + ". Player " + playerNum + ", Which piece would you like to move " + s);
 
                 if (!Constants.RUNSIM && players.get(playerNum).getType() == Type.PLAYER) {
-                    toMove = sc.nextInt();
+                    if (Globals.clickedPiecePlayerNum == playerNum) {
+                        toMove = Globals.clickedPieceNum;
+                    } else {
+                        toMove = -1;
+                    }
                 } else {
                     toMove = movablePieces.get(rand.nextInt(movablePieces.size()));
                 }
-                result = players.get(playerNum).move(toMove, roll);
+
+                if (toMove != -1) {
+                    result = players.get(playerNum).move(toMove, roll);
+                } else {
+                    result = -1;
+                }
+
+                int count = 0;
 
                 // player tried something invalid, should get to try again
                 while (result == -1) {
-                    System.out.println("Invalid pick, try again: " + s);
-                    toMove = sc.nextInt();
-                    result = players.get(playerNum).move(toMove, roll);
+                    count+= 1;
+                    if (Globals.clickedPiecePlayerNum == playerNum) {
+                        toMove = Globals.clickedPieceNum;
+                        result = players.get(playerNum).move(toMove, roll);
+                        Globals.clickedPiecePlayerNum = -1;
+                        Globals.clickedPieceNum = -1;
+                    } else {
+                        result = -1;
+                    }
+
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException ex) {
+                    }
+
+                    System.out.println(count);
+                    System.out.println("PlayerNum: " + Integer.toString(Globals.clickedPiecePlayerNum) +
+                            "  PieceNum: " + Integer.toString(Globals.clickedPieceNum));
                 }
             }
 
@@ -153,6 +179,10 @@ public class Game {
     }
     public Board getBoard() {
         return board;
+    }
+
+    public Die getDie() {
+        return die;
     }
     public boolean isGameOver() {
         return this.gameOver;

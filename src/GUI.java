@@ -1,11 +1,15 @@
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
@@ -49,7 +53,7 @@ public class GUI extends Application{
 
 
         select = new SelectGUI();
-        board = new BoardGUI(new Board());
+        board = new BoardGUI(new Board(), new Die(Constants.NUMDIESIDES));
 
         gamePane.setCenter(board.getBoard());
         gamePane.setTop(gameButtons());
@@ -83,7 +87,7 @@ public class GUI extends Application{
         Button resumeButton = new Button("RESUME");
         resumeButton.setOnAction( e -> {
             game = loader.load();
-            board.setSquares(game.getBoard());
+            board.setSquares(game.getBoard(), game.getDie());
             window.setScene(gameScene);
             run();
 
@@ -103,17 +107,25 @@ public class GUI extends Application{
      * Main game loop
      */
     public void run() {
-        window.setScene(gameScene);
-//        taskThread();
-        thread();
-        // start turn with player0
 
+        board.getBoard().setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent e) {
+                Node source = (Node)e.getSource() ;
+                Integer colIndex = GridPane.getColumnIndex(source);
+                Integer rowIndex = GridPane.getRowIndex(source);
+
+            }
+        });
+
+        window.setScene(gameScene);
+        thread();
 
         Thread t = new Thread(() -> {
+
             int turnCount = game.getStartingTurn();
             while (!game.isGameOver()) {
-
-//            board.setSquares(game.getBoard());
 
                 game.turn(turnCount);
                 // until the game is over, rotate turns
@@ -123,8 +135,6 @@ public class GUI extends Application{
                 }
                 loader.save(turnCount, game.getPlayers());
             }
-
-
 
 
             // if the game is over because a winner was selected, win
@@ -151,14 +161,14 @@ public class GUI extends Application{
                     @Override
                     public void run() {
                         if (game != null) {
-                            board.setSquares(game.getBoard());
+                            board.setSquares(game.getBoard(), game.getDie());
                         }
                     }
                 };
 
                 while (true) {
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(500);
                     } catch (InterruptedException ex) {
                     }
 
@@ -205,7 +215,7 @@ public class GUI extends Application{
         Button startButton = new Button("START");
         startButton.setOnAction( e -> {
             game = new Game(select.getTypes());
-            board.setSquares(game.getBoard());
+            board.setSquares(game.getBoard(), game.getDie());
             window.setScene(gameScene);
             run();
 

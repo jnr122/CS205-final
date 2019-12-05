@@ -1,15 +1,17 @@
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.transform.Scale;
 
-import java.awt.*;
-
 public class PieceGUI extends Circle {
 
+    private int playerNum;
+    private int pieceNum;
 
-    public PieceGUI(int playerNum){
+    public PieceGUI(int playerNum, int pieceNum){
+
+        this.playerNum = playerNum;
+        this.pieceNum = pieceNum;
 
         switch(playerNum){
             case 0:
@@ -34,13 +36,25 @@ public class PieceGUI extends Circle {
         this.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent t) {
-                System.out.println("hi");
+                Globals.clickedPiecePlayerNum = PieceGUI.this.playerNum;
+                Globals.clickedPieceNum = PieceGUI.this.pieceNum;
+
+                System.out.println(Globals.clickedPieceNum);
+                System.out.println(Globals.clickedPiecePlayerNum);
+
             }
         });
 
         setMouseOver();
 
+    }
 
+    public int getPlayerNum() {
+        return playerNum;
+    }
+
+    public int getPieceNum() {
+        return pieceNum;
     }
 
     private void makeRed(){
