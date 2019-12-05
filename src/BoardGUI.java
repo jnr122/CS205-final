@@ -89,6 +89,10 @@ public class BoardGUI {
             if (currTurn == currPlayerNum) {
                 boardSqaure.setStrokeWidth(5);
                 boardSqaure.getStyleClass().add("currentTurn");
+            } else {
+                boardSqaure.setStrokeWidth(5);
+                boardSqaure.getStyleClass().add("notCurrentTurnRed");
+
             }
 
             boardSqaure.getStyleClass().add("redSquare");
@@ -118,6 +122,9 @@ public class BoardGUI {
             if (currTurn == currPlayerNum) {
                 boardSqaure.setStrokeWidth(5);
                 boardSqaure.getStyleClass().add("currentTurn");
+            } else {
+                boardSqaure.setStrokeWidth(5);
+                boardSqaure.getStyleClass().add("notCurrentTurnYellow");
             }
 
             boardSqaure.getStyleClass().add("yellowSquare");
@@ -145,6 +152,9 @@ public class BoardGUI {
             if (currTurn == currPlayerNum) {
                 boardSqaure.setStrokeWidth(5);
                 boardSqaure.getStyleClass().add("currentTurn");
+            }{
+                boardSqaure.setStrokeWidth(5);
+                boardSqaure.getStyleClass().add("notCurrentTurnGreen");
             }
 
             boardSqaure.getStyleClass().add("greenSquare");
@@ -172,6 +182,9 @@ public class BoardGUI {
             if (currTurn == currPlayerNum) {
                 boardSqaure.setStrokeWidth(5);
                 boardSqaure.getStyleClass().add("currentTurn");
+            } else {
+                boardSqaure.setStrokeWidth(5);
+                boardSqaure.getStyleClass().add("notCurrentTurnBlue");
             }
 
             boardSqaure.getStyleClass().add("blueSquare");

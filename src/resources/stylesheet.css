@@ -83,6 +83,26 @@
     -fx-fill: #f39c12;
 }
 
+.notCurrentTurnRed {
+    -fx-stroke: #e74c3c;
+
+}
+
+.notCurrentTurnYellow {
+    -fx-stroke: #f39c12;
+
+}
+
+.notCurrentTurnBlue {
+    -fx-stroke: #3498db;
+
+}
+
+.notCurrentTurnGreen {
+    -fx-stroke: #2ecc71;
+
+}
+
 .currentTurn{
     -fx-stroke: #17202A;
 }
@@ -105,6 +125,7 @@
 .yellowPiece{
     -fx-background-color: #e67e22;
     -fx-fill: #e67e22;
+
 }
 
 .greenPiece{
