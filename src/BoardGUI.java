@@ -258,7 +258,7 @@ public class BoardGUI {
             boardSqaure.setRadius(30.0f);
             board.add(boardSqaure, 3+i, 9);
 
-            Piece piece1 = backendBoard.getHomes().get(currPlayerNum).get(i).getPiece();
+            Piece piece1 = backendBoard.getFinishes().get(currPlayerNum).get(i).getPiece();
             if (piece1 != null) {
                 PieceGUI piece = new PieceGUI(piece1.getPlayerNum(), piece1.getPieceNum());
                 board.add(piece, 3+i, 9);
@@ -275,7 +275,7 @@ public class BoardGUI {
             boardSqaure.setRadius(30.0f);
             board.add(boardSqaure, 9, 9-i);
 
-            Piece piece1 = backendBoard.getHomes().get(currPlayerNum).get(i).getPiece();
+            Piece piece1 = backendBoard.getFinishes().get(currPlayerNum).get(i).getPiece();
             if (piece1 != null) {
                 PieceGUI piece = new PieceGUI(piece1.getPlayerNum(), piece1.getPieceNum());
                 board.add(piece, 9, 9-i);
@@ -292,7 +292,7 @@ public class BoardGUI {
             boardSqaure.setRadius(30.0f);
             board.add(boardSqaure,9-i , 3);
 
-            Piece piece1 = backendBoard.getHomes().get(currPlayerNum).get(i).getPiece();
+            Piece piece1 = backendBoard.getFinishes().get(currPlayerNum).get(i).getPiece();
             if (piece1 != null) {
                 PieceGUI piece = new PieceGUI(piece1.getPlayerNum(), piece1.getPieceNum());
                 board.add(piece, 9-i, 3);
