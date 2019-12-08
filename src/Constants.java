@@ -28,6 +28,9 @@ class Constants {
     static final int FROMHOMETHRESHOLD = 6;
     static final boolean RUNSIM = false;
     static final String FILEPATH = "src/saveData/save.txt";
+    static final int UPDATEDELAY = 1200;
+    static final int TURNDELAY = 300;
+
 }
 
 class Globals {

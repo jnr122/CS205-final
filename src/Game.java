@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
 /**
  * Representation of the game
  *
@@ -83,15 +82,15 @@ public class Game {
             int toMove;
             int result;
 
-            Scanner sc = new Scanner(System.in);
-            System.out.println(board);
+//            Scanner sc = new Scanner(System.in);
+//            System.out.println(board);
 
             roll = die.roll();
             movablePieces = players.get(playerNum).getMovablePieces(roll);
 
             // players can move no pieces
             if (movablePieces.size() == 0) {
-                Thread.sleep(1500);
+                Thread.sleep(Constants.TURNDELAY);
 //                System.out.print("Roll = " + roll + ". Player " + playerNum + " can't move anything. (c) to continue: ");
 //                if (!Constants.RUNSIM && players.get(playerNum).getType() == Type.PLAYER) {
 //                    sc.next();
@@ -111,7 +110,7 @@ public class Game {
                         toMove = -1;
                     }
                 } else {
-                    Thread.sleep(1500);
+                    Thread.sleep(Constants.TURNDELAY);
                     toMove = movablePieces.get(rand.nextInt(movablePieces.size()));
                 }
 
@@ -136,7 +135,7 @@ public class Game {
                     }
 
                     try {
-                        Thread.sleep(100);
+                        Thread.sleep(250);
                     } catch (InterruptedException ex) {
                     }
 

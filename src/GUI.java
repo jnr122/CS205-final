@@ -158,8 +158,6 @@ public class GUI extends Application{
 
     }
 
-
-
     private void thread() {
         // longrunning operation runs on different thread
         Thread thread = new Thread(new Runnable() {
@@ -185,7 +183,7 @@ public class GUI extends Application{
 
                 while (true) {
                     try {
-                        Thread.sleep(300);
+                        Thread.sleep(Constants.UPDATEDELAY);
                     } catch (InterruptedException ex) {
                     }
 
@@ -219,22 +217,22 @@ public class GUI extends Application{
         Label move = new Label("");
         switch (player) {
             case 0:
-                move.setText("Turn: Player 0");
+                move.setText("TURN: PLAYER 0");
                 break;
             case 1:
-                move.setText("Turn: Player 1");
+                move.setText("TURN: PLAYER 1");
                 break;
             case 2:
-                move.setText("Turn: Player 2");
+                move.setText("TURN: PLAYER 2");
                 break;
             case 3:
-                move.setText("Turn: Player 3");
+                move.setText("TURN: PLAYER 3");
                 break;
             default:
                 break;
         }
         if (winner != -1) {
-            move.setText("Player " + winner + " WON!");
+            move.setText("PLAYER " + winner + " WON!");
         }
         move.getStyleClass().add("viewMove");
         move.setAlignment(Pos.CENTER_LEFT);
